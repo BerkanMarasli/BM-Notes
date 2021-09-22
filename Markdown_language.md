@@ -156,6 +156,8 @@ Tables are not officially supported but Github and other rendering websites will
 
 To add colour, inline HTML inside Markdown.
 
+Note: Github discards any HTML (therefore this will not appear on Github)
+
 ```markdown
 <span style='color: lightblue'>Some **light blue** markdown text!</span>
 ```
