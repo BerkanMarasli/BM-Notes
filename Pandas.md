@@ -121,19 +121,48 @@ Write data frame to **txt** file: `dataframe.to_csv('some_filename.txt')` or  `d
 
 
 
+## Filtering Data
+
+### Conditional filtering
+
+Filter row based on conditions: `dataframe.loc[(condition 1) &/| (condition 2)]` or `df.loc[(condition 1) &/| (condition 2)]`. For example, to get all rows where column 'Type 1' is equal to 'Grass' or column 'Type 2' is equal to 'Poison': `dataframe.loc[(dataframe['Type 1'] == 'Grass') | (dataframe['Type 2'] == 'Poison')]`. Ensure all conditions are enclosed by parentheses. Notice that ( & represents and ) and ( | represents or )
+
+### Regex filtering
+
+Filter row based on string condition: `dataframe.loc[(condition)]` or  `df.loc[(condition)]`. For example, to get all rows where the column 'Name' includes the word 'Mega': `dataframe.loc[dataframe['Name'].str.contains('Mega')]`. If we wanted the oppoiste (i.e. all rows where the column 'Name' does not include the word 'Mega') then append ~ to the beginning of the condition: `dataframe.loc[~dataframe['Name'].str.contains('Mega')]`
+
+Filter row based on regex condition: firstly import regex by `import re`. Then add regex expression within contains(X) where X is the expression as well as adding the attribute `regex=True`. For example, to get all rows where column 'Type 1' is equal to 'Fire' or 'Grass': `dataframe.loc[dataframe['Type 1'].str.contains('Fire|Grass', regex=True)]`. To ignore casing, add attribute `flags=re.I`. For example, `dataframe.loc[dataframe['Type 1'].str.contains('Fire|Grass', flags=re.I, regex=True)]`
+
+### Conditional changes
+
+Change value based on condition: `dataframe.loc[(condition), 'column_to_change'] = 'new_value'` or  `df.loc[(condition), 'column_to_change'] = 'new_value'`. For example, to change all column 'Type 1' values from 'Fire' to 'Flamer': `dataframe.loc[dataframe['Type 1'] == 'Fire', 'Type 1'] = 'Flamer'`. Another example, to add a column 'Is Fire' with value set to True if column 'Type 1' is equal to 'Fire':  `dataframe.loc[dataframe['Type 1'] == 'Fire', 'Is Fire'] = True`
+
+Change multiple values based on condition: 'column_to_change' can be given as a list with mulitple columns to change. For example `['column_to_change_1', 'column_to_change_2']`. Assignment should be given as a list of equivalent size: `['new_value_1', 'new_value_2']`
 
 
 
+## Reset index
+
+Reset indexing on data frame: `dataframe = dataframe.reset_index()` or  `df = df.reset_index()`. By default, the old indexes are stored in a new column; to avoid this, add attribute `drop=True`. For example, `dataframe = dataframe.reset_index(drop=True)`. To avoid storing in new data frame (which saves memory), add attribute `inplace=True`. For example, `dataframe = dataframe.reset_index(drop=True, inplace=True)`
 
 
 
+## Groupby (Aggregate Statistics)
+
+Group same values within a specific column: `dataframe.groupby(['column_to_group'])` or  `df.groupby(['column_to_group'])`
+
+Statistical metrics can then be applied to these groups (mean, sum, count, max, min, mode, etc.): `dataframe.groupby(['column_to_group']).mean()`
+
+Which can be sorted by a particular column: `dataframe.groupby(['column_to_group']).mean().sort_values('column_to_sort', ascending=True/False)`
+
+Group same values of multiple columns: `dataframe.groupby(['column_to_group_1', 'column_to_group_2'])` or  `df.groupby(['column_to_group_1', 'column_to_group_2'])`
 
 
 
+## Useful methods
 
+.dropna() = challenge 1
 
+.duplicated() = challenge 1
 
-
-
-
-
+.unique() = challenge 2
