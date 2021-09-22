@@ -26,6 +26,22 @@ Line 1
 
 Line 2
 
+'>{space}{text}' : indicates block quote 
+
+> Blockquote text here...
+
+'** {withoutspace}{text}{withoutspace} **' : indicates bold
+
+The text is **bold!** .
+
+'* {withoutspace}{text}{withoutspace} *' : indicates italic
+
+The text is *italic!* .
+
+'~~ {withoutspace}{text}{withoutspace} ~~'
+
+The text is ~~stroke through~~.
+
 ## Bullet Points
 
 '-{space}' or '+{space}' or '*{space}' : bullet point level 1
@@ -67,7 +83,7 @@ Bullet points can be nested
 '{open triple backticks}{code language}{new line}{code}{new line}{close triple backticks}' : block code 
 
 ``` javascript
-await response = fetch('http://google.co.uk')
+const response = await fetch('http://google.co.uk')
 ```
 
 ```html
@@ -76,5 +92,25 @@ await response = fetch('http://google.co.uk')
 </h1>
 ```
 
+## Images
 
+'!{[alt text]}{(URL)}'
+
+![Random Image](http://picsum.photos/200/200)
+
+## Tables
+
+Tables are not officially supported but Github and other rendering websites will support tables.
+
+'| {heading 1} | {heading 2} | {heading3}' |
+
+'| --- | --- | --- |'
+
+'| {content 1} | {content 2} | {content 3} |'
+
+'| {more content 1} | {more content 2} | {more content 3} |'
+
+| Heading | Header       | Head |
+| ------- | ------------ | ---- |
+| Content | More content | Text |
 
