@@ -122,7 +122,7 @@ plt.savefig('saved_graph.png', dpi=400)
 
 
 
-## Bar Graph
+## Bar Chart
 
 ### `.bar()`
 
@@ -139,7 +139,9 @@ Graphing properites:
 
 - Title
 - X-axis label
+- X-ticks
 - Y-axis label
+- Y-ticks
 - Legend
 - Resize graph
 
@@ -160,6 +162,54 @@ for bar in bars:
     bar.set_hatch(patterns.pop(0))
 plt.show()
 ```
+
+
+
+## Histogram
+
+### `.hist()`
+
+matplotlib.pyplot.hist: https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.hist.html
+
+`matplotlib.pyplot.hist(X)` or  `plt.pyplot.hist(X)`: histogram plot where X are the values, commonly a 1D array. This will automatically asign bins.
+
+By adding an attribute `bins = `, bins sizes can be defined
+
+```python
+overall = [12, 45, 65, 34, 78, 89, 6, 23, 58, 98, 10, 44, 22, 68, 66]
+bins_defined = [0, 20, 40, 60, 80, 100] # 0-19, 20-39, 40-59, 60-79, 80-100??????????????????????
+plt.hist(overall, bins=bins_defined)
+```
+
+Graphing properites:
+
+- Title
+- X-axis label
+- X-ticks
+- Y-axis label
+- Y-ticks
+- Legend
+- Resize graph
+
+
+
+## Pie Chart
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
