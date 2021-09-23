@@ -166,3 +166,6 @@ Group same values of multiple columns: `dataframe.groupby(['column_to_group_1', 
 .duplicated() = challenge 1
 
 .unique() = challenge 2
+
+.apply()
+
