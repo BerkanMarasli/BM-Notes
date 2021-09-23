@@ -70,6 +70,10 @@ plt.ylabel('Y-axis')
 
 `matplotlib.pyplot.yticks(Y)` or  `plt.pyplot.yticks(Y)`: changes y-axis tick labels where Y is commonly a 1D array
 
+If labels are overlapping, could display every N labels (or use vertical/horizontal alignment): `plt.xticks(df['column_name'][::N])`
+
+Labels not present in dataframe can be added: `plt.xticks(df['column_name'][::N].tolist() + ['x_label_to_add'])`
+
 ```python
 plt.xticks([0, 1, 2, 3, 4])
 plt.yticks([0, 2, 4, 6, 8])
