@@ -94,7 +94,7 @@ For example, to create a new column called 'Total' which is the sum of columns 4
 
 ### Remove column
 
-Remove a specific column: `dataframe.drop(columns=['column_name'])` or `df.drop(columns=['column_name'])`. This does not directly manipulate the data frame so, a re-assignment is neccessary. For example, `dataframe = dataframe.drop(columns=['column_name'])` or `df = df.drop(columns=['column_name'])`
+Remove a specific column: `dataframe.drop(columns=['column_name'])` or `df.drop(columns=['column_name'])`. This does not directly manipulate the data frame so, a re-assignment is neccessary. For example, `dataframe = dataframe.drop(columns=['column_name'])` or `df = df.drop(columns=['column_name'])`. The attribute `inplace=True` could be added instead of the re-assignment
 
 ### Rearranging columns
 
