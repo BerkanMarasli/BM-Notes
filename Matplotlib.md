@@ -120,6 +120,43 @@ plt.savefig('saved_graph.png', dpi=400)
 
 ## Bar Graph
 
+### `.bar()`
+
+`matplotlib.pyplot.bar(X, Y)` or  `plt.pyplot.bar(X, Y)`: bar plot where X are the labels and Y are the values. X andY are commonly a 1D array
+
+```python
+labels = ['A', 'B', 'C']
+values = [1, 4, 2]
+plt.bar(labels, values)
+plt.show()
+```
+
+Graphing properites:
+
+- Title
+- X-axis label
+- Y-axis label
+- Legend
+- Resize graph
+
+### `.set_hatch()`
+
+`.set_hatch('X')`: adds a pattern to the specified bar where X is the pattern identifier
+
+```python
+bars = plt.bar(labels, values)
+bars[0].set_hatch('/')
+bars[1].set_hatch('o')
+bars[2].set_hatch('*')
+plt.show()
+######## Cleaner Code ########
+bars = plt.bar(labels, values)
+patterns = ['/', 'o', '*']
+for bar in bars:
+    bar.set_hatch(patterns.pop(0))
+plt.show()
+```
+
 
 
 
