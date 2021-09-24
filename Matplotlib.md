@@ -195,7 +195,30 @@ Graphing properites:
 
 ## Pie Chart
 
+### `.pie()`
 
+matplotlib.pyplot.pie: https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.pie.html#matplotlib.pyplot.pie
+
+`matplotlib.pyplot.pie(X)` or  `plt.pyplot.pie(X)`: pie chart where X are the values (wedge sizes)
+
+Add an attribute for labels as `labels = [Y]` where Y is a 1D array of labels, same length as X
+
+Add an attribute to show percentages using `autopct = 'Z'` where Z is the form to display percentages. For example `autopct = '%.2f'`. To show percentage symbol next to number, add `%%` to inside the string: `autopct = '%.2f %%'`
+
+To break pie chart wedges a part, use attribute `explode = [XX]` where XX is a list of proportions to explode each wedge. For example, `explode = [0.1, 0.1, 0.1]` if the 3 wedges were to explode equally. These do not have to be equal: `explode = [0.1, 0, 0.4]`
+
+```python
+left_foot_count = 120
+right_foot_count = 320
+plt.pie([left_foot_count, right_foot_count])
+plt.show()
+```
+
+Graphing properites:
+
+- Title
+- Legend
+- Resize graph
 
 
 
