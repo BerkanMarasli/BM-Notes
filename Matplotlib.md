@@ -21,7 +21,7 @@ import pandas as pd
 - [Basic Graphing](./Matplotlib.md#basic-graphing)
 - [Bar Chart](./Matplotlib.md#bar-chart)
 - [Histogram](./Matplotlib.md#histogram)
-- [Pie Chart](./Matplotlib.md#pie)
+- [Pie Chart](./Matplotlib.md#pie-chart)
 - [Box & Whisker](./Matplotlib.md#box--whisker-plot)
 
 
