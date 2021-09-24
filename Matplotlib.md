@@ -16,6 +16,16 @@ import pandas as pd
 
 
 
+## Contents
+
+- [Bar Chart](##bar-chart)
+
+
+
+
+
+
+
 ## Basic Graphing
 
 ### `.plot()`
