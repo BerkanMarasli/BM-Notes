@@ -18,11 +18,11 @@ import pandas as pd
 
 ## Contents
 
+- [Basic Graphing](./Matplotlib.md#basic-graphing)
 - [Bar Chart](./Matplotlib.md#bar-chart)
-
-
-
-
+- [Histogram](./Matplotlib.md#histogram)
+- [Pie Chart](./Matplotlib.md#pie)
+- [Box & Whisker](./Matplotlib.md#box--whisker-plot)
 
 
 
