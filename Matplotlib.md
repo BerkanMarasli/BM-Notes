@@ -18,7 +18,7 @@ import pandas as pd
 
 ## Contents
 
-- [Bar Chart](##bar-chart)
+- [Bar Chart](./Matplotlib.md#bar-chart)
 
 
 
