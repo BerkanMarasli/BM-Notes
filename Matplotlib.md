@@ -222,13 +222,48 @@ Graphing properites:
 
 
 
+## Box & Whisker Plot
 
+Box and whisker can be referred to as candlesticks
 
+`.boxplot()`
 
+matplotlib.pyplot.boxplot: https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.boxplot.html?highlight=boxplot#matplotlib.pyplot.boxplot
 
+`matplotlib.pyplot.boxplot(X)` or  `plt.pyplot.boxplot(X)`: box and whisker plot where X is a list of values per candle/box
 
+```python
+team_1_scores = [12, 54, 87, 34, 67]
+team_2_scores = [9, 74, 37, 54, 97]
+plt.boxplot([team_1_scores, team_2_scores])
+plt.show()
+```
 
+Graphing properites:
 
+- Title
+- X-axis label
+- X-ticks
+- Y-axis label
+- Y-ticks
+- Legend
+- Resize graph
+
+`.set()`
+
+Use `.set()` to set attributes for each candle/box:
+
+- `color`: edge colour
+- `facecolor`: fill colour -> ensure to set attribute `patch_artist=True` within `.boxplot()`
+- `linewidth`: thickness of line
+- `medianprops`: thickness of median line
+
+```python
+boxes = plt.boxplot([team_1_scores, team_2_scores], patch_artist=True)
+for box in boxes['boxes']:
+    box.set(color='blue', linewidth=2, facecolor='grey', medianprops={'linewidth': 2})
+plt.show()
+```
 
 
 
