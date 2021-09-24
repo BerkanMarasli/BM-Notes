@@ -4,6 +4,21 @@ Import pandas: `import pandas` or `import pandas as pd`
 
 
 
+## Contents
+
+- [Read File](./Pandas.md#read-file)
+- [Reading Data](./Pandas.md#reading-data)
+- [Describe Data](./Pandas.md#describe-data)
+- [Sorting Data](./Pandas.md#sorting-data)
+- [Manipulating Data](./Pandas.md#manipulating-data)
+- [Writing Data](./Pandas.md#writing-data)
+- [Filtering Data](./Pandas.md#filtering-data)
+- [Reset Index](./Pandas.md#reset-index)
+- [Groupby (Aggregate Statistics)](./Pandas.md#groupby-aggregate-statistics)
+- [Useful Methods](./Pandas.md#useful-methods)
+
+
+
 ## Read File
 
 Read **csv** file to data frame: `dataframe = pandas.read_csv('some_filename.csv')` or `df = pandas.read_csv('some_filename.csv')`
