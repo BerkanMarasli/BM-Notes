@@ -24,8 +24,6 @@ SELECT * FROM mytable;
 SELECT column, another_column, ... FROM mytable;
 ```
 
-
-
 ### `WHERE`
 
 Filter rows of a SQL database. Condition applied to each row of data to determine whether it should be included or not in result
@@ -58,9 +56,7 @@ For text data:
 | IN (...)     | String exists in a list                                      | col_name IN ("A", "B", "C")                                  |
 | NOT IN (...) | String does not exist in a list                              | col_name NOT IN ("D", "E", "F")                              |
 
-
-
-Filter and sort query result of a SQL database
+Filter and sort query result of a SQL database:
 
 ### `DISTINCT`
 
@@ -90,6 +86,44 @@ LIMIT will reduce the number of rows to return and the optional OFFSET will spec
 -- Select query with limited rows
 SELECT column, another_column, ... FROM mytable WHERE condition(s) ORDER BY column ASC/DESC LIMIT num_limit OFFSET num_offset;
 ```
+
+
+
+## Multi-table Queries
+
+Tables that share information about a single entity need to have a primary key that identifies that entity uniquely across the database
+
+### Database normalisation
+
+Database normalisation is useful because it minimises duplicate data in any single table, and allows for data in the database to grow independently of each other. As a trade-off, queries get slightly more complex since they have to be able to find data from different parts of the database, and performance issues can arise when working with many large tables. This information needs combining so that the relevant information can be extracted
+
+### `JOIN`
+
+INNER JOIN: matches rows from the first table and the second table which have the same key (defined by the ON constraint) to create a result row with the combined columns from both tables.
+
+```sqlite
+-- Select query with INNER JOIN on mulitple tables
+SELECT column, another_column, ... FROM mytable INNER JOIN another_table ON mytable.id = another_table.id WHERE condition(s) ORDER BY column ASC/DESC LIMIT num_limit OFFSET num_offset;
+```
+
+### `Outer JOINs`
+
+Like the INNER JOIN these three joins have to specify which column to join the data on. When joining table A to table B, a LEFT JOIN simply includes rows from A regardless of wehther a matching row is found in B. The RIGHT JOIN is the same, but reversed, keeping rows in B regardless of whether a match is found in A. Finally, a FULL JOIN simply means that rows from both tables are kept, regardless of whether a matching row exists in the other table
+
+Additional logic may be needed to deal with NULLs in the result
+
+```sqlite
+-- Select query with LEFT/RIGHT/FULL JOINs on multiple tables
+SELECT column, another_column, ... FROM mytable INNER/LEFT/RIGHT/FULL JOIN another_table ON mytable.id = another_table.id WHERE condition(s) ORDER BY column ASC/DESC LIMIT num_limit OFFSET num_offset;
+```
+
+
+
+
+
+
+
+
 
 
 
