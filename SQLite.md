@@ -39,15 +39,15 @@ SELECT column, another_column, ... FROM mytable WHERE condition AND/OR another_c
 
 For numerical data:
 
-=, !=, <, <=, >, >=			Standard numerical operators			col_name operation value
+| Operation               | Description                                          | Example                                  |
+| ----------------------- | ---------------------------------------------------- | ---------------------------------------- |
+| =, !=, <, <=, >, >=     | Standard numerical operators                         | col_name operation value                 |
+| BETWEEN ... AND ...     | Number is within range of two values (inclusive)     | col_name BETWEEN value_1 AND value_2     |
+| NOT BETWEEN ... AND ... | Number is not within range of two values (inclusive) | col_name NOT BETWEEN value_1 AND value_2 |
+| IN (...)                | Number exists in a list                              | col_name IN (2, 4, 6)                    |
+| NOT IN (...)            | Number does not exist in a list                      | col_name NOT IN (1, 3, 5)                |
 
-BETWEEN ... AND ...			Number is within range of two values (inclusive)			col_name BETWEEN value_1 AND value_2
 
-NOT BETWEEN ... AND ...			Number is not within range of two values (inclusive)			col_name NOT BETWEEN value_1 AND value_2
-
-IN (...)			Number exists in a list			col_name IN (2, 4, 6)
-
-NOT IN (...)			Number does not exist in a list			col_name NOT IN (1, 3, 5)
 
 
 
