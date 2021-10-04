@@ -135,7 +135,27 @@ AND/OR another_condition;
 
 
 
+## Queries With Expressions
 
+### `AS`
+
+Each database has its own supported set of mathematical, string, and date functions that can be used in a query, which you can find in their own respective docs. These should be given a descriptive alias using the AS keyword
+
+```sqlite
+-- Select query with expression aliases
+SELECT col_expression AS expr_description, ...
+FROM mytable;
+
+-- Example query with expressions
+SELECT particle_speed / 2.0 AS half_particle_speed
+FROM physics_data
+WHERE ABS(particle_position) * 10.0 > 500;
+
+-- Another example query with expressions
+SELECT column AS better_column_name, ...
+FROM a_long_widgets_table_name AS mywidgets
+INNER JOIN widget_sales ON mywidgets.id = widget_sales.widget_id;
+```
 
 
 
