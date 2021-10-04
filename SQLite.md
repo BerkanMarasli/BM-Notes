@@ -119,6 +119,24 @@ SELECT column, another_column, ... FROM mytable INNER/LEFT/RIGHT/FULL JOIN anoth
 
 
 
+## NULLs
+
+An alternative to NULL values in your database is to have data-type appropiate default values, like 0 for numerical data. But if your database needs to store incomplete data, then NULL values can be approbate if the default values will skew analysis later
+
+A column can be tested for NULL in a WHERE clause by using either the IS NULL or IS NOT NULL constraint
+
+```sqlite
+-- Select query with constraints on NULL values
+SELECT column, another_column, ...
+FROM mytable
+WHERE column IS/IS NOT NULL
+AND/OR another_condition;
+```
+
+
+
+
+
 
 
 
