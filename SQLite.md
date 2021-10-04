@@ -198,7 +198,18 @@ WHERE constraint_expression
 GROUP BY column;
 ```
 
+### `HAVING`
 
+Used specifically with GROUP BY to allow for grouped rows from the result set to be filtered
+
+```sqlite
+-- Select query with aggregate functions over groups with HAVING constraint
+SELECT group_by_column, AGG_FUNC(column_or_expression) AS aggregate_description, ...
+FROM mytable
+WHERE constraint_expression
+GROUP BY column
+HAVING group_condition;
+```
 
 
 
