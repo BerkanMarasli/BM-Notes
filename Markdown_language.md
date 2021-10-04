@@ -124,7 +124,7 @@ Images can be linked to a website by wrapping syntax above in {[image syntax]}{(
 
 Tables are not officially supported but Github and other rendering websites will support tables.
 
-'| {heading 1} | {heading 2} | {heading3}' |
+'| {heading 1} | {heading 2} | {heading3} |'
 
 '| --- | --- | --- |'
 
