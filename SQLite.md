@@ -274,7 +274,20 @@ In addition, mathematical and string expressions can be usde with the values tha
 
 ### `UPDATE`
 
+Specify exactly which table, columns, and rows to update. In addition, the data you are updating has to match the data type of the columns in the table schema
 
+The statement works by taking mulitple column/value pairs, and applying those changes to each and every row that satisfies the constraint in the WHERE clause. Omitting the WHERE clause will apply update to all rows
+
+```sqlite
+-- Update statement with values
+UPDATE mytable
+SET column = value_or_expr,
+	other_column = another_value_or_expr
+	...
+WHERE condition;
+```
+
+Tip: always write the constraint first and test it in a `SELECT` query to make sure you are updating the right rows, and only then writing the column/value pairs to update
 
 
 
