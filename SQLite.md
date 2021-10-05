@@ -2,13 +2,11 @@
 
 
 
-relational databases
-
-MySQL, Postgres, SQLite, Microsoft SQL server
+Relational Databases include: MySQL, Postgres, SQLite, Microsoft SQL server
 
 
 
-brew install sqlite
+Install SQLite using Homebrew:
 
 ```
 brew install sqlite
@@ -381,6 +379,16 @@ DROP TABLE IF EXISTS mytable;
 Like the `CREATE TABLE` statement, the database may throw an error if the specified table does not exist, and to suppress that error, you can use the `IF EXISTS` clause.
 
 In addition, if you have another table that is dependent on columns in table you are removing (for example, with a `FOREIGN KEY` dependency) then you will have to either update all dependent tables first to remove the dependent rows or to remove those tables entirely.
+
+
+
+ADDITIONAL LESSONS: https://sqlbolt.com/topics
+
+- Subqueries
+- Set operations
+- Foreign keys
+- Dates and times
+- Views
 
 
 
