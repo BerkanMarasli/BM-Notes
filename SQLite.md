@@ -289,47 +289,19 @@ WHERE condition;
 
 Tip: always write the constraint first and test it in a `SELECT` query to make sure you are updating the right rows, and only then writing the column/value pairs to update
 
+### `DELETE`
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-creating a table
+Specify table to act on, and the rows of the table to delete through the WHERE clause. Omitting the WHERE constraint will cause all rows to be removed
 
 ```sqlite
-
+-- Delete statement with condition
+DELETE FROM mytable
+WHERE condition;
 ```
 
-adding rows
+Tip: always run the constraint in a `SELECT` query first to ensure that you are removing the right rows. Without a proper backup or test database, it is downright easy to irrevocably remove data, so always read your `DELETE` statements twice and execute once.
 
-```sqlite
 
-```
-
-selecting columns
-
-```sqlite
-
-```
-
-selecting records based on qualities
-
-```sqlite
-
-```
 
 
 
