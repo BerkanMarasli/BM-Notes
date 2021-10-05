@@ -243,6 +243,41 @@ FROM mytable
 
 
 
+## Schema
+
+Database schema refers to the structure of each database table, and the datatypes that each column of the table can contain. The fixed structure is what allows a database to be efficient, and consistent despite storing millions of rows
+
+### `INSERT`
+
+The INSERT declares which table to write into, the columns of data that we are filling, and one or more rows of data to insert. In general, each row of data you insert should contain values for every corresponding column in the table. You can insert multiple rows at a time by just listing them sequentially
+
+```sqlite
+-- Insert statement with values for all columns
+INSERT INTO mytable
+VALUES (value_or_expr, another_value_or_expr, ...),
+	   (value_or_expr, another_value_or_expr, ...),
+	   ...;
+```
+
+In some cases, if you have incomplete data and the table contains columns that support default values, you can insert rows with only the columns of data you have by specifying them explicitly. The number of values should match the number of columns specified
+
+```sqlite
+-- Insert statement with specific columns
+INSERT INTO mytable
+(column, another_column, ...)
+VALUES (value_or_expr, another_value_or_expr, ...),
+	   (value_or_expr, another_value_or_expr, ...),
+	   ...;
+```
+
+In addition, mathematical and string expressions can be usde with the values that are inserting
+
+### `UPDATE`
+
+
+
+
+
 
 
 
