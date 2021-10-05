@@ -344,9 +344,30 @@ Table of table constraints that each column can have:
 | CHECK (expression) | This allows you to run a more complex expression to test whether the values inserted are valid. For example, you can check that values are positive, or greater than a specific size, or start with a certain prefix, etc. |
 | FOREIGN KEY        | This is a consistency check which ensures that each value in this column corresponds to another value in a column in another table.<br />For example, if there are two tables, one listing all Employees by ID, and another listing their payroll information, the `FOREIGN KEY` can ensure that every row in the payroll table corresponds to a valid employee in the master Employee list. |
 
+### `ALTER`
 
+Use ALTER TABLE to add, remove, or modify columns and table constraints
 
+```sqlite
+-- Altering table to add new column(s)
+ALTER TABLE mytable
+ADD column DataType optional_table_constraint DEFAULT default_value;
+```
 
+```sqlite
+-- Altering table to remove column(s)
+-- NOT SUPPORTED BY SQLite
+ALTER TABLE mytable
+DROP column_to_to_deleted;
+```
+
+```sqlite
+-- Altering table name
+ALTER TABLE mytable
+RENAME TO new_table_name;
+```
+
+There are additional methods that each database implementation supports.
 
 
 
