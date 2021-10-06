@@ -121,6 +121,8 @@ Additional logic may be needed to deal with NULLs in the result
 SELECT column, another_column, ... FROM mytable INNER/LEFT/RIGHT/FULL JOIN another_table ON mytable.id = another_table.id WHERE condition(s) ORDER BY column ASC/DESC LIMIT num_limit OFFSET num_offset;
 ```
 
+![Screenshot 2021-10-06 at 09.16.51](/Users/berkanmarasli/Desktop/BM-Notes/SQLite.assets/Screenshot 2021-10-06 at 09.16.51.png)
+
 
 
 ## NULLs
