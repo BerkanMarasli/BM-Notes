@@ -391,7 +391,9 @@ ADDITIONAL LESSONS: https://sqlbolt.com/topics
 - Foreign keys
 - Dates and times
 - Views
-- https://www.youtube.com/watch?v=d3l59EbgJ0w&ab_channel=CodingTech
+
+https://www.youtube.com/watch?v=d3l59EbgJ0w&ab_channel=CodingTech
+
 - Unions
 - Case statement
 - Aliasing
