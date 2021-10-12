@@ -40,6 +40,37 @@
     The solution is found when the second number is selected (underlined in blue)
 </details>
 
+```python
+# Python solution - O(n)
+def twoSum(nums: List[int], target: int) -> List[int]:
+    prevMap = {} # HashMap -> val : index
+    for i, n in enumerate(nums):
+        diff = target - n
+        if diff in prevMap:
+            return [prevMap[diff], i]
+        prevMap[n] = i
+```
+
+```javascript
+// Javascript solution - O(n)
+function twoSum(nums, target) {
+    const prevMap = {} // HashMap -> val : index
+    let result
+    nums.forEach((n, i) => {
+        const diff = target - n
+        if (diff in prevMap) {
+            result = [prevMap[diff], i]
+        }
+        prevMap[n] = i
+    })
+    return result
+}
+```
+
+
+
+
+
 
 
 
