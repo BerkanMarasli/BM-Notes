@@ -29,13 +29,38 @@
 <details>
     <summary>Brute force method: O(n^2)</summary>
     <br />
-    <img src='./Technical_interviews.assets/Screenshot 2021-10-12 at 14.13.49.png' />
+    <img src='./Technical_interviews.assets/leetcode1img1.png' />
 </details>
 
 <details>
     <summary>One pass method O(n)</summary>
     <br />
+    <img src='./Technical_interviews.assets/leetcode1img2.png' />
+    <br />
+    The solution is found when the second number is selected (underlined in blue)
 </details>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
