@@ -402,7 +402,7 @@ https://www.youtube.com/watch?v=d3l59EbgJ0w&ab_channel=CodingTech
 
 
 - INDEXES
-- common table expressions WITH ... AS (...)
+- AKA. temp views -> common table expressions WITH ... AS (...)
 
 
 
