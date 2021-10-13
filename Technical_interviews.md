@@ -6,6 +6,14 @@
 
 
 
+Two Sum - HashMap (Leetcode 1)
+
+Sliding Window: Best Time to Buy and Sell Stock (Leetcode 121)
+
+Product of Array Except Self (Leetcode 238)
+
+
+
 ### Two Sum - HashMap (Leetcode 1)
 
 > ---
@@ -151,13 +159,52 @@ function maxProfit(prices) {
 
 
 
+### Product of Array Except Self (Leetcode 238)
 
+>---
+>
+>**Problem Description:**
+>
+>Given an integer array `nums`, return an array `answer` such that `answer[i]` is equal to the product of all the elements of `nums` except `nums[i]`.
+>
+>The product of any prefix of `nums` is guaranteed to fit in a 32-bit integer.
+>
+>You must write an algorithm that runs in O(n) time and without using the division operation.
+>
+>---
+>
+>**Example:**
+>
+>Input: nums = [1, 2, 3, 4]
+>
+>Output: [24, 12, 8, 6]
+>
+>---
+>
+>**Example 2:**
+>
+>Input: nums = [-1, 1, 0, -3, 3]
+>
+>Output: [0, 0, 9, 0, 0]
+>
+>---
 
-
-
-
-
-
+<details>
+    <summary>Solution: memory O() and time O()</summary>
+    Note: if the / operator was allowed -> take product of all integers and forEach divide the sum by the integer.
+    <br />
+    1. Calculate array of prefix -> sum of all integers before index (inclusive) -> O(n)
+    <br />
+    2. Calculate array of postfix -? sum of all integers after index (inclusive) -> O(n)
+    <br />
+    3. 
+    <br />
+    4. 
+    <br />
+    5. 
+    <br />
+    <img src='./Technical_interviews.assets/leetcode121img1.png' />
+</details>
 
 
 
