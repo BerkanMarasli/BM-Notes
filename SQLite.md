@@ -14,7 +14,7 @@ brew install sqlite
 
 
 
-## Simple Queries
+## Simple Queries
 
 ### `SELECT`
 
