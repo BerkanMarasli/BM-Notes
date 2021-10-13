@@ -8,11 +8,15 @@
 
 ### Two Sum - HashMap (Leetcode 1)
 
+> ---
+>
 > **Problem Description:**
 >
 > Given an array of integers, return indices of the two numbers such that they add up to a specific target.
 >
 > You may assume that each input would have exactly one solution, and you may not use the same element twice.
+>
+> ---
 >
 > **Example:**
 >
@@ -20,11 +24,13 @@
 >
 > Because nums[0] + nums[1] = 2 + 7 = 9 => return [0, 1]
 >
-> ---
+> **Example 2:**
 >
 > Given nums = [2, 1, 5, 3], target = 4
 >
 > Because nums[1] + nums[3] = 1 + 3 = 4 => return [1, 3]
+>
+> ---
 
 <details>
     <summary>Brute force solution: O(n^2)</summary>
@@ -71,6 +77,8 @@ function twoSum(nums, target) {
 
 ### Sliding Window: Best Time to Buy and Sell Stock (Leetcode 121)
 
+> ---
+>
 > **Problem Description:**
 >
 > Say you have an array for which the ith element is the price of a given stock on day i.
@@ -79,6 +87,8 @@ function twoSum(nums, target) {
 >
 > Note that you cannot sell a stock before you buy one.
 >
+> ---
+>
 > **Example:**
 >
 > Input: [7, 1, 5, 3, 6, 4]
@@ -86,6 +96,8 @@ function twoSum(nums, target) {
 > Output: 5
 >
 > Explanation: Buy on day 2 (price = 1) and sell on day 5 (price = 6), profit = 6 - 1 = 5. Not 7 - 1 = 6, as selling price needs to be larger than buying price.
+>
+> ---
 
 <details>
     <summary>Solution: memory O(1) and time O(n)</summary>
