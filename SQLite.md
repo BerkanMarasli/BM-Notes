@@ -388,14 +388,14 @@ ADDITIONAL LESSONS: https://sqlbolt.com/topics
 
 - Subqueries
 - Set operations
-- Foreign keys
+- Foreign keys -> FOREIGN KEY (...) REFERNCES (...)
 - Dates and times
-- Views
+- Views -> CREATE VIEW
 
 https://www.youtube.com/watch?v=d3l59EbgJ0w&ab_channel=CodingTech
 
 - Unions
-- Case statement
+- Case statement -> https://www.sqlite.org/lang_expr.html#the_case_expression
 - Aliasing
 - Partition by
 
