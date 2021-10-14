@@ -190,21 +190,54 @@ function maxProfit(prices) {
 >---
 
 <details>
-    <summary>Solution: memory O() and time O()</summary>
+    <summary>Solution: memory O(1) and time O(n)</summary>
     Note: if the / operator was allowed -> take product of all integers and forEach divide the sum by the integer.
     <br />
     1. Calculate array of prefix -> sum of all integers before index (inclusive) -> O(n)
     <br />
     2. Calculate array of postfix -? sum of all integers after index (inclusive) -> O(n)
     <br />
-    3. 
+    3. For every value in input array, insert the product of the prefix and postfix -> memory O(n^2) and time O(n)
     <br />
-    4. 
+    Note: to avoid memory O(n^2), directly insert product of prefix and postfix to output array by first doing a loop (start to end) for prefixes and then a loop (end to start) for postfixes
     <br />
-    5. 
+    Note: the solution is O(1) memory as the output array does not contribute. If otherwise, memory O(n)
     <br />
-    <img src='./Technical_interviews.assets/leetcode121img1.png' />
+    <img src='./Technical_interviews.assets/leetcode238img1.png' />
 </details>
+
+```python
+# Python solution - O(n)
+def productExceptSelf(nums: List[int]) -> List[int]:
+    result = [1] * (len(nums)) # Does not contribute to space complexity in context of problem
+    prefix = 1
+    for i in range(len(nums)):
+        result[i] = prefix
+        prefix *= nums[i]
+    postfix = 1
+    for i in range(len(nums) - 1, -1, -1): # loop from end to start
+        result[i] *= postfix
+        postfix = *= nums[i]
+    return result
+```
+
+```javascript
+// Javascript solution - O(n)
+function productExceptSelf(nums) {
+    const result = new Array(nums.length)
+    let prefix = 1
+    for (let i = 0; i < nums.length; i++) {
+        result[i] = prefix
+        prefix = prefix * nums[i]
+    }
+    let postfix = 1
+    for (let i = nums.length-1; i >= 0; i--) {
+        result[i] = result[i] * postfix
+        postfix = postfix * nums[i]
+    }
+    return result
+}
+```
 
 
 
