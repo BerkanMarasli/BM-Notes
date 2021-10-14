@@ -12,6 +12,8 @@ Sliding Window: Best Time to Buy and Sell Stock (Leetcode 121)
 
 Product of Array Except Self (Leetcode 238)
 
+Maximum subarray (Leetcode 53)
+
 
 
 ### Two Sum - HashMap (Leetcode 1)
@@ -49,9 +51,10 @@ Product of Array Except Self (Leetcode 238)
 <details>
     <summary>One pass solution O(n)</summary>
     <br />
-    <img src='./Technical_interviews.assets/leetcode1img2.png' />
+    The solution is found when the second number in the answer is selected (underlined in blue)
     <br />
-    The solution is found when the second number is selected (underlined in blue)
+    <br />
+    <img src='./Technical_interviews.assets/leetcode1img2.png' />
 </details>
 
 ```python
@@ -109,6 +112,7 @@ function twoSum(nums, target) {
 
 <details>
     <summary>Solution: memory O(1) and time O(n)</summary>
+    <br />
     1. Initialise two points: leftP = buy at day 1 (index 0), rightP = sell at day 2 (index 1), and maxProfit = -1000
     <br />
     2. Calculate rightP - leftP as profit
@@ -118,6 +122,7 @@ function twoSum(nums, target) {
     4. If profit less than 0 (indicating decrease in price) -> increment leftP and rightP by one
     <br />
     5. Else (increase in price) -> increment rightP only
+    <br />
     <br />
     <img src='./Technical_interviews.assets/leetcode121img1.png' />
 </details>
@@ -191,6 +196,7 @@ function maxProfit(prices) {
 
 <details>
     <summary>Solution: memory O(1) and time O(n)</summary>
+    <br />
     Note: if the / operator was allowed -> take product of all integers and forEach divide the sum by the integer.
     <br />
     1. Calculate array of prefix -> sum of all integers before index (inclusive) -> O(n)
@@ -202,6 +208,7 @@ function maxProfit(prices) {
     Note: to avoid memory O(n^2), directly insert product of prefix and postfix to output array by first doing a loop (start to end) for prefixes and then a loop (end to start) for postfixes
     <br />
     Note: the solution is O(1) memory as the output array does not contribute. If otherwise, memory O(n)
+    <br />
     <br />
     <img src='./Technical_interviews.assets/leetcode238img1.png' />
 </details>
@@ -241,13 +248,78 @@ function productExceptSelf(nums) {
 
 
 
+### Maximum Subarray (Leetcode 53)
 
+>---
+>
+>**Problem Description:**
+>
+>Given an integer array `nums`, find the contiguous subarray (containing at least one number) which has the largest sum and return its sum.
+>
+>---
+>
+>**Example:**
+>
+>Input: nums = [-2, 1, -3, 4, -1, 2, 1, -5, 4]
+>
+>Output: 6
+>
+>Explanation: [4, -1, 2, 1] has the largest sum = 6
+>
+>---
 
+<details>
+    <summary>Cubic solution: O(n^3)</summary>
+    <br />
+    <img src="./Technical_interviews.assets/leetcode53img1.png" />
+</details>
 
+<details>
+    <summary>Quadratic solution: O(n^2)</summary>
+    <br />
+    Decrease from O(n^3) to O(n^2) by storing the sum of the integers and just adding the current integer to the sum.
+    <br />
+    <br />
+    <img src="./Technical_interviews.assets/leetcode53img2.png" />
+</details>
 
+<details>
+    <summary>Linear solution: O(n)</summary>
+    <br />
+    A negative starting sum does not contribute to the maximum sum positively -> can be ignored.
+    <br />
+    <br />
+    <img src="./Technical_interviews.assets/leetcode53img3.png" />
+</details>
 
+```python
+# Python solution - O(n)
+def maxSubArray(nums: List[int]) -> int:
+    maxSum = nums[0]
+    currentSum = 0
+    for number in nums:
+        if currentSum < 0:
+            currentSum = 0
+        currentSum += number
+        maxSum = max(maxSum, currentSum)
+    return maxSum
+```
 
-
+```javascript
+// Javascript solution - O(n)
+function maxSubArray(nums) {
+    let maxSum = nums[0]
+    let currentSum = 0
+    nums.forEach(number => {
+        if (currentSum < 0) {
+            currentSum = 0
+        }
+        currentSum += number
+        maxSum = Math.max(maxSum, currentSum)
+    })
+    return maxSum
+}
+```
 
 
 
