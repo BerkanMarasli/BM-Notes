@@ -1,3 +1,5 @@
+
+
 # Technical Interview Questions
 
 
@@ -13,6 +15,8 @@ Sliding Window: Best Time to Buy and Sell Stock (Leetcode 121)
 Product of Array Except Self (Leetcode 238)
 
 Maximum subarray (Leetcode 53)
+
+Maximum Product Subarray (Leetcode 152)
 
 
 
@@ -320,6 +324,106 @@ function maxSubArray(nums) {
     return maxSum
 }
 ```
+
+
+
+## Maximum Product Subarray (Leetcode 152)
+
+>---
+>
+>**Problem Description:**
+>
+>Given an integer array `nums`, find the contiguous subarray within an array (containing at least one number) which has the largest product.
+>
+>---
+>
+>**Example:**
+>
+>Input: nums = [2, 3, -2, 4]
+>
+>Output: 6
+>
+>Explanation: [2, 3] has the largest product = 6
+>
+>---
+
+Dynamic Programming Question
+
+<details>
+    <summary>Brute force solution: O(n^2)</summary>
+    <br />
+    <img src='./Technical_interviews.assets/leetcode152img1.png' />
+</details>
+
+<details>
+    <summary>Solution: memory O(1) and time O(n)</summary>
+    <br />
+    Note: If all integers are positive, product is always increasing as you increase index.
+    <br />
+    Note: If all integers are negative, value is always increasing but sign is alternating. There could be a subarray that yields the maximum product without including all integers in its calculation.
+    <br />
+    1. The idea is to keep track of both the maximum product subarray and the minimum product subarray.
+    <br />
+    2. For each integer, store the maximum and minimum value using the previous maximum and minimum value.
+    <br />
+    Edge case: 0 value -> when integer is equal to 0, replace maximum and minimum value with 1.
+    <br />
+    <br />
+    <img src='./Technical_interviews.assets/leetcode152img2.png' />
+</details>
+
+```python
+# Python solution - O(n)
+def maxProduct(nums: List[int]) -> int:
+    result = max(nums)
+    currentMax = 1
+    currentMin = 1
+    for number in nums:
+        if number == 0:
+            currentMax = 1
+            currentMin = 1
+            continue
+        temp = number * currentMax # To avoid using updated currentMax in calculating currentMin
+        currentMax = max(number * currentMax, number * currentMin, number)
+        currentMin = min(temp, number * currentMin, number)
+        result = max(result, currentMax, currentMin)
+    return result
+```
+
+```javascript
+// Javascript solution - O(n)
+function maxProduct(nums) {
+    let result = Math.max(...nums)
+    let currentMax = 1
+    let currentMin = 1
+    for (let number of nums) {
+        if (number === 0) {
+            currentMax = 1
+            currentMin = 1
+            continue
+        }
+        const temp = number * currentMax
+        currentMax = Math.max(number * currentMax, number * currentMin, number)
+        currentMin = Math.min(temp, number * currentMin, number)
+        result = Math.max(result, currentMax, currentMin)
+    }
+    return result
+}
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
