@@ -66,6 +66,9 @@ git rm -r --cached .
 ```bash
 # Commit all files in the staging area
 git commit -m "<message>"
+
+# Amend previous commit message
+git commit --amend -m "<new message>"
 ```
 
 
