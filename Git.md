@@ -64,6 +64,48 @@ git rm -r --cached .
 `git commit`
 
 ```bash
+# Commit all files in the staging area
+git commit -m "<message>"
+```
+
+
+
+`git log` and `git show`
+
+```bash
+# Show commit history
+git log
+
+# Show details of a specified commit
+git show <commit hash> # Hash obtained from `git log`
+```
+
+
+
+`git diff`
+
+```bash
+# Show difference between current working directory and commits
+git diff
+```
+
+
+
+`git restore`
+
+```bash
+# Discard changes to file in working directory
+git restore <file>
+
+# Discard changes to all files in working directory
+git restore .
+```
+
+
+
+`git`
+
+```bash
 
 ```
 
