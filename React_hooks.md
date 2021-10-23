@@ -87,6 +87,66 @@ useEffect(() => {
 
 
 
+## `useContext`
+
+useContext uses React's context API which is used to share data between components wihtout passing props.
+
+All the components that need access to the context informaion needs to be wrapped around `<ContextName.Provider value={Contect_value}></ContextName.Provider>`.
+
+```javascript
+// App.js (parent component)
+import React, { useState } from 'react'
+import FunctionComponent from './FunctionComponent'
+
+export const ContextName = React.createContext()
+
+export default function App(){
+    const [darkTheme, setDarkTheme] = useState(true)
+    return (
+        <ContextName.Provider value={darkTheme}>
+    		<FunctionComponent />
+    	</ContextName.Provider>
+    )
+}
+
+// FunctionComponent.js (child component)
+import React, { useContext } from 'react'
+import { ContextName } from '.App'
+
+export default function FunctionComponent() {
+    const darkTheme = useContext(ContextName)
+    return (
+        <h1>Dark theme is {darkTheme}</h1>
+    )
+}
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
