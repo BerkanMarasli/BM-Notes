@@ -12,13 +12,21 @@ Basic Hooks:
 
 Additional Hooks:
 
-- useReducer
-- useCallback
-- useMemo
 - useRef
+- useReducer
+- useMemo
+- useCallback
 - useImperativeHandle
 - useLayoutEffect
 - useDebugValue
+
+Utility Hooks:
+
+- useToggle
+- useTimeout
+- useDebounce
+- useUpdateEffect
+- useArray
 
 
 
@@ -123,19 +131,58 @@ export default function FunctionComponent() {
 
 
 
+## `useRef`
+
+Used to grab native HTML elements from JSX (grab elements from the DOM).
+
+useRef does not re-render UI.
+
+```javascript
+// useRef
+import { useRef } from 'react'
+
+function App() {
+    const myBtn = useRef(null)
+    
+    const clickIt = () => myBtn.current.click()
+    
+    return (
+        <button ref={myBtn}></button>
+	)
+}
+```
 
 
 
+## `useReducer`
 
 
 
+## `useMemo`
+
+Linked to performance?
 
 
 
+## `useCallback`
+
+Linked to performance?
 
 
 
+## `useImperativeHandle`
 
+
+
+## `useLayoutEffect`
+
+
+
+## `UseDebugValue`
+
+
+
+https://www.youtube.com/watch?v=0c6znExIqRw&ab_channel=WebDevSimplified
 
 
 
