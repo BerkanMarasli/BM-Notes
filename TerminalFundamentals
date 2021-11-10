@@ -1,0 +1,44 @@
+MacOS Terminal (zsh [z shell])
+
+pwd = print working directory // prints the path of the current directory
+ls = list items // lists all items (folders, docs, etc) in the current directory
+
+cd [] = change directory // use to change directory
+    / use to navigate to root directory
+    /Users use to navigate to users directory (absolute path)
+    ~ use to navigate to home directory
+    (foldername/foldername/etc) use to navigate to a specific folder in directory (relative path)
+    .. use to go back one hierarchy level
+
+touch [] = create file // creates new file in the current directory
+    filename with extension (ABC.html, ABC.js, etc)
+    multiple files can be created by adding filename with extension back to back with space
+    /ZZ/ABC.html will create the file inside ZZ directory
+
+mkdir [] = create directory // creates new folder in the current directory
+    foldername with no extension
+    /ZZ/foldername will create a folder inside ZZ directory
+    TO HAVE A SPACE IN THE NAME use \ (with\ spaces = with spaces) - same logic applies for everything else
+
+rm [] = remove file // removes file from the current directory
+    filename with extension (ABC.html, ABC.js, etc)
+    can be done for multiple files via filenames with spaces in between
+
+rmdir [] = remove directory // removes folder in the current directory
+    multple works, \ for folders with spaces, no extension in name
+    cannot remove directory if not empty (can use rm -r)
+
+man [command] = manual // access manual of command with 'flags' (additional options)
+    use 'q' to go back to main shell
+
+cp [] = copy // copy files 
+    fileToCopy directoryToCopyTo (webdev/index.html ./)
+    ./ means current directory
+    TO COPY FOLDER: for example, cp -r foldername ~
+
+mv [] = move // move files
+    for example, mv ../webdev webdev/
+    no flag needed for folders
+    TO RENAME FILES: for example, mv index.html index2.html
+
+
