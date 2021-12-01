@@ -281,7 +281,26 @@ println(add(3, 5)) // 8
 
 ## Higher-order functions
 
+Higher-order functions can take functions as arugments and are able to return functions.
 
+```scala
+def functionNameA(argument : argumentDataType, ..., functionNameB : (argumentDataType, ...) => returnDataTypeB) : returnDataTypeA = functionNameB(argument, ...)
+
+// Example
+def math(x : Double, y : Double, f : (Double, Double) => Double) : Double = f(x, y)
+val result = math(5, 2, (x,y) => x + y) // Passing annoymous function
+
+// Example - reuse function
+def math(x : Double, y : Double, z : Double, f : (Double, Double) => Double) : Double = f(f(x, y), z)
+val result = math(5, 2, 10, (x,y) => x + y) // Passing annoymous function
+
+// The annoymous function can be replaced with _+_
+// The _ is known as a wildcard
+```
+
+
+
+## Partially Applied Functions
 
 
 
