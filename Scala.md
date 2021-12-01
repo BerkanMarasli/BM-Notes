@@ -116,12 +116,6 @@ val b : Int = a * 2 // val b : Int = 1000
 
 
 
-## String methods
-
-
-
-
-
 ## If else statements
 
 ```scala
@@ -302,11 +296,40 @@ val result = math(5, 2, 10, (x,y) => x + y) // Passing annoymous function
 
 ## Partially Applied Functions
 
+Not providing all the arguments of a function.
+
+```scala
+val sum = (a : Int, b : Int, c : Int) => a + b + c
+sum(10, 20, 30) // 60
+val f = sum(10, 20, _ : Int)
+sum(30) // 60
+val f = sum(10, _ : Int, _ : Int)
+sum(20, 30) // 60
+```
 
 
 
+## Closures
+
+A closure is a function which uses one or more variables declared outside this function.
+
+Inpure closure - the variable outside the function can change (i.e. var).
+
+Pure closure - the variable outside the function cannot change (i.e. val).
+
+```scala
+val add = (x : Int) => x + 10
+add(20) // 30
+
+// Closure:
+val number: Int = 10
+val add = (x : Int) => x + number
+add(20) // 30
+```
 
 
+
+## Function currying
 
 
 
