@@ -706,7 +706,7 @@ class Rectangle(var width: Double, var height: Double) extends Polygon {
 }
 ```
 
-### Abstract class
+### Abstract classes
 
 Used when:
 
@@ -725,6 +725,35 @@ abstract class Polygon {
   def area: Double // No body provided means it is an abstract method - the area method must be implemented inside all subclasses
 }
 new Polygon // exception
+```
+
+
+
+## Traits
+
+Scala doesnt allow multiple inhertience (extends) from more than one class.
+
+Interface - describes a set of methods and properties that an implementing class must have.
+
+Traits - partially implemented interfaces.
+
+```scala
+trait traitName {
+}
+// Can contain abstract and non-abstract methods
+// But at least one method should be an abstract method
+
+trait Shape {
+  def colour: String
+}
+abstract class Polygon {
+  def area: Double
+}
+class Rectangle extends Polygon with Shape {
+  override def area: Double = 2929
+  def colour: String = "Blue" // Note: you dont need override keyword when overriding trait method
+}
+// Multiple with's to inherit from multiple traits
 ```
 
 
