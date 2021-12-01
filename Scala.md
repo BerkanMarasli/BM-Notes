@@ -28,6 +28,16 @@ s"We have $n apples" // "We have 45 apples"
 // Expressions inside interpolated strings
 val a = Array(11, 9, 6)
 s"I am ${a(0) - a(1)} years old" // "I am 2 years old"
+
+// Raw strings ignore special characters
+raw"New line \n. return: \r" // "New line \n. return: \r"
+
+// Characters can be escaped
+"They stood outside the \"Rose and Crown\"" // "They stood outside the "Rose and Crown"
+
+// Triple double-quotes let strings span multiple rows and contain quotes
+
+// Type-safe string interpolation using f string interpolation...
 ```
 
 
@@ -55,13 +65,15 @@ s"I am ${a(0) - a(1)} years old" // "I am 2 years old"
 
 ## Operations
 
-| Operation       | Example                                    | Example Result             |
-| --------------- | ------------------------------------------ | -------------------------- |
-| ! (not)         | !true<br />!false                          | false<br />true            |
-| == (equal to)   | true == true<br />true == false            | true<br />false            |
-| > or <          | 10 > 5                                     | true                       |
-| +<br />-<br />* | 1 + 1<br />2 - 1<br />5 * 3                | 2<br />1<br />15           |
-| /               | 6 / 2<br />6 / 4<br />6.0 / 4<br />6 / 4.0 | 3<br />1<br />1.5<br />1.5 |
+| Operation            | Example                                    | Example Result             |
+| -------------------- | ------------------------------------------ | -------------------------- |
+| ! (not)              | !true<br />!false                          | false<br />true            |
+| == (equal to)        | true == true<br />true == false            | true<br />false            |
+| > or <               | 10 > 5                                     | true                       |
+| +<br />-<br />*      | 1 + 1<br />2 - 1<br />5 * 3                | 2<br />1<br />15           |
+| /                    | 6 / 2<br />6 / 4<br />6.0 / 4<br />6 / 4.0 | 3<br />1<br />1.5<br />1.5 |
+| && or \|\| (and, or) |                                            |                            |
+| += or -=             |                                            |                            |
 
 
 
@@ -104,21 +116,194 @@ val b : Int = a * 2 // val b : Int = 1000
 
 
 
-
-
-
-
-
-
 ## String methods
 
 
 
 
 
+## If else statements
+
+```scala
+if (expression) {
+  // Do something
+} else {
+  // Do something else
+}
+
+// if expression
+val varName = if (expression) doThis else doThis
+println(if (expression) doThis else doThis)
+```
 
 
 
+## While & do-while statements
+
+```scala
+while (expression) {
+  // Do something
+}
+
+// The code inside 'do' will execute at least once even if the expression is false to start with
+do {
+  // Do something
+} while (expression)
+```
+
+
+
+## For statements
+
+For statement will automatically take the 'varName' as a var variable.
+
+```scala
+for (varName <- range) {
+  // Do something
+}
+
+// Example - prints 1, 2, 3, 4, 5
+for (i <- 1 to 5) {
+  println(i)
+}
+
+// Example 2 - prints 1, 2, 3, 4, 5
+for (i <- 1 until 6) {
+  println(i)
+}
+
+// 1 to 5 == 1.to(5)
+// 1 until 6 == 1.until(6)
+// <- is called the generator
+
+// Multiple ranges (nested for loop)
+for (i <- 1 to 3; j <- 1 to 3) {
+  println(i + " " + j)
+}
+// 1 1, 1 2, 1 3, 2 1, 2 2, 2 3, 3 1, 3 2, 3 3
+
+// Loop through lists
+val lst = List(1, 2, 3, 4, 5)
+for (i <- lst) {
+  println(i)
+}
+// 1, 2, 3, 4, 5
+
+// Loop through lists with filter
+val lst = List(1, 2, 3, 4, 5)
+for (i <- lst; if i < 4) {
+  println(i)
+}
+// 1, 2, 3
+
+// For loop as expression
+val lst = List(1, 2, 3, 4, 5)
+val result = for {i <- lst; if i < 4} yield {
+  i * i
+}
+println(result)
+// List(1, 4, 9)
+```
+
+
+
+## Match expressions
+
+```scala
+val age : Int = 18
+age match {
+  case 20 => println(age)
+  case 18 => println(age)
+  case 16 => println(age)
+  case _ => println("default case")
+}
+
+val result = age match {
+  case 20 => age
+  case 18 => age
+  case 16 => age
+  case _ => "default case"
+}
+println(result)
+
+val i : Int = 7
+i match {
+  case 1 | 3 | 5 | 7 | 9 => println("odd")
+  case 2 | 4 | 6 | 8 | 10 => println("even")
+  case _ => "Not in specified range"
+}
+```
+
+
+
+## Functions
+
+The last line of the function is the return value/expression.
+
+If the function does not return anything, the returnDataType is Unit.
+
+Function names can be defined as operators (e.g. +, -, **).
+
+```scala
+def functionName(argument : argumentDataType, ...) : returnDataType = // Do something (one line)
+
+def functionName(argument : argumentDataType, ...) : returnDataType = {
+  // Do something (multi line)
+}
+
+// Function that takes only one argument inside object...
+object Math {
+  def square(x : Int) : Int = x * x
+}
+println(Math.square(3)) == println(Math square 3)
+```
+
+A default value for the argument of a function can be provided.
+
+```scala
+def functionName(argument : argumentDataType = defaultValue, ...) : returnDataType = // Do something (one line)
+
+// Example
+object Math {
+  def square(x : Int = 4) : Int = x * x
+}
+println(Math.square()) // 16
+```
+
+Functions are treated as first class citizens. This means a function can be assigned to a variable using annoymous functions.
+
+```scala
+val add = (x : Int, y : Int) => x + y
+println(add(3, 5)) // 8
+```
+
+
+
+## Higher-order functions
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Objects are classes which are already instantiated (single-ton). This means you cannot use the new keyword to create a new instant.
 
 
 
