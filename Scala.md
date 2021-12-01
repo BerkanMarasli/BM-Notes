@@ -331,6 +331,32 @@ add(20) // 30
 
 ## Function currying
 
+Currying is the technique of transforming a function that takes multiple arguments into a function that takes a single argument.
+
+```scala
+def add(x : Int, y : Int) = x + y
+add(20, 10) // 30
+
+// Function currying
+def addFC(x : Int) = (y : Int) => x + y
+addFC(20)(10) // 30
+
+// Further use example
+def addFC(x : Int) = (y : Int) => x + y
+val sum40 = addFC(40)
+sum40(60) // 100
+
+// Simple way of function currying
+def addFCSimple(x : Int)(y : Int) = x + y
+addFCSimple(2)(3) // 5
+val sum5 = addFCSimple(5)_
+sum5(10) // 5
+```
+
+
+
+## Strings
+
 
 
 
