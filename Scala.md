@@ -706,6 +706,27 @@ class Rectangle(var width: Double, var height: Double) extends Polygon {
 }
 ```
 
+### Abstract class
+
+Used when:
+
+- You want to restrict the instantiation of the superclass.
+- To ensure neccessary override methods are implemented in every case.
+
+If as class is declared abstract, it cannot be instantiated. An abstract class does a few things for the inheriting subclass:
+
+- Define methods which can be used by the inheriting subclass
+- Define abstract methods which the inheriting subclass must implement
+- provide a common interface which allows the subclass to be interchanged with all other subclasses
+
+```scala
+// Add keyword 'abstract' in front of class declaration
+abstract class Polygon {
+  def area: Double // No body provided means it is an abstract method - the area method must be implemented inside all subclasses
+}
+new Polygon // exception
+```
+
 
 
 
