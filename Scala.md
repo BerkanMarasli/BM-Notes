@@ -684,13 +684,20 @@ class Polygon {
 object Polygon {
   def main(args: Array[String]) {
     var poly = new Polygon
+    var tri = new Triangle
     var rect = new Rectangle(55.2, 20.0)
     printArea(poly) // 0.0
+    printArea(tri) // 0.0
     printArea(rect) // 1104.0
   }
   def printArea(p: Polygon) {
     println(p.area)
   }
+}
+
+// Triangle.scala
+class Triangle extends Polygon {
+  
 }
 
 // Rectangle.scala
