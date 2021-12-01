@@ -494,6 +494,29 @@ mapName.keys.foreach { key => println("key " + key); println("value " + mapName(
 
 
 
+## Tuples
+
+A class that can contain different data types of elements.
+
+They are of FIXED SIZE. You cannot change the values of tuples once declared.
+
+Tuples can contain up to 22 elements.
+
+```scala
+val tupleName = (values) // val myTuple = (1, 2, "hello", true)
+val tupleName = new TupleNUMBEROFELEMENTS(values) // val myTuple = new Tuple3(1, 2, true)
+
+// Access specific element
+._POSITIONOFELEMENT // myTuple._3 returns "hello"
+
+// Iterate over tuple using foreach
+tupleName.productIterator.foreach{i => println(i)}
+
+// Tuple within tuple
+myTuple = new Tuple3(1, "hello", (2, 3))
+myTuple._3._2 // returns 3
+```
+
 
 
 
