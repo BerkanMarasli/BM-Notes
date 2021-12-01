@@ -87,7 +87,6 @@ Note:
 
 - Only classes can have declared but unassigned variables
 - Scala has built-in data type recognition
-- Strings are assigned using double quotes "" only
 
 ```scala
 // val/var variableName : dataType = initialValue
@@ -357,9 +356,37 @@ sum5(10) // 5
 
 ## Strings
 
+Strings are assigned using double quotes "" only.
+
+Scala makes use of Java methods for strings.
 
 
 
+## Arrays
+
+Data structure that can store FIXED SIZE sequential elements of SAME DATA TYPE.
+
+Arrays are zero indexed.
+
+Unassigned elements will contain the default value for that data type.
+
+```scala
+val arrayName : Array[dataType] = new Array[dataType](arraySize)
+val arrayName = new Array[dataType](arraySize)
+val arrayName = Array(1, 2, 3, 4, 5)
+
+for (i <- arrayName) {
+  println(i)
+}
+
+for (i <- 0 to (arrayName.length - 1)) {
+  println(arrayName(i))
+}
+```
+
+
+
+## Lists
 
 
 
