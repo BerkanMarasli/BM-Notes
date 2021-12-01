@@ -388,6 +388,43 @@ for (i <- 0 to (arrayName.length - 1)) {
 
 ## Lists
 
+Arrays are mutable whereas lists are IMMUTABLE (cannot change element value of lists once assigned).
+
+Arrays are flat whereas lists represent LINKED LISTS.
+
+Lists are zero indexed.
+
+```scala
+val listName : List[dataType] = List(1, 2, 3, 4, 5)
+println(listName) // List(1, 2, 3, 4, 5)
+
+// :: prepends a single item (makes a new List so needs to be assigned to a new variable)
+1 :: List(2, 3) returns List(1, 2, 3)
+// ::: prepends a complete list (makes a new List so needs to be assigned to a new variable)
+List(1, 2) ::: List(3, 4) returns List(1, 2, 3 ,4)
+
+// Nil
+1 :: 5 :: 9 :: Nil returns List(1, 5, 9)
+
+.head - first value of List
+.tail - last value of List (whatever remains after removing first value from List)
+.isEmpty - boolean value of whether List is empty
+.reverse - reverses the List
+.max - max value in List
+List.fill(numberOfElements)(whatElement) // List.fill(5)(2) -> List(2, 2, 2, 2, 2)
+
+// Iterate over List using foreach
+listName.foreach(operation)
+listName.foreach(println)
+var sum : Int = 0;
+listName.foreach(sum += _)
+
+// Iterate over List using for loop
+for (i <- listName) {
+  // Do something
+}
+```
+
 
 
 
