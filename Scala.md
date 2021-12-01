@@ -427,6 +427,56 @@ for (i <- listName) {
 
 
 
+## Sets
+
+Collection of different elements (no duplicates) of same data type. All element values must be unique.
+
+Two types of sets: mutable and immutable. All sets are immutable by default.
+
+```scala
+val setName : Set[dataType] = Set(1, 2, 3, 4, 4, 4) // Set(1, 2, 3, 4)
+
+// To declare mutable Set
+var setName : scala.collection.mutable.Set[dataType] = scala.collection.mutable.Set(1, 2, 3, 4)
+
+// Add element to mutable Set (makes a new Set so needs to be assigned to a new variable)
+// Sets in scala are not ordered!
+setName + elementToAdd
+println(setName + 5) // Set(1, 5, 2, 3, 4)
+
+// Check whether element is present in Set
+setName(elementToCheck)
+println(setName(3)) // true
+
+.head - first value of Set
+.tail - last value of Set (remaining Set once first value is removed)
+.isEmpty - checks if Set is empty (returns boolean value)
+setOne ++ setTwo == setOne.++(setTwo) // concatinate Sets
+setOne & setTwo == setOne.&(setTwo) == setOne.intersect(setTwo) // common values between Sets (intersection of Sets)
+.min - minimum value in Set
+.max - maximum value in Set
+
+// Iterating Set with foreach
+setName.foreach(operation)
+
+// Iterating Set with for loop
+for (i <- setName) {
+  // Do something
+}
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
