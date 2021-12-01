@@ -616,13 +616,90 @@ println(lst1.foldLeft("z")(_ + _)) // returns List(z, zA, zAB, zABC)
 
 
 
+## Classes
+
+object keyword used to create a single-ton class. No new instance of this class can be created.
+
+class keyword used to create class that can have multiple instances.
+
+```scala
+// Basic definition
+class className
+var newInstance = new className
+
+// Primary constructor in class
+class className(define constructur variables)
+class User(var name: String, var age: Int)
+var newUser = new User("Max", 28)
+newUser.name // returns Max
+newUser.age // returns 28
+newUser.name = "Tom"
+newUser.age = 22
+
+// private and public - private members can only be accessed inside the class
+class User(private var name: String, var age: Int) {
+  def printName { println(name) }
+}
+newUser.name // exception
+newUser.printName // valid as accessing member through class method
+
+// var getter setter
+// val getter ------
+// no val/var - no getter setter
+```
+
+### Auxiliary constructors
+
+Alternative constructor for a class. They must have different signatures and must call the previously defined constructor.
+
+Defined as a method with the name 'this'
+
+```scala
+class User(var name: String, var age: Int) {
+  def this() {
+    this("Tom", 32) // You must call the previously defined constructor
+  }
+  def this(name : String) {
+    this(name, 32)
+  }
+}
+
+var user1 = new User("Max", 28)
+var user2 = new User()
+var user3 = new User("Max")
+```
+
+### Inheritance - extending a class
+
+Classes in Scala can be extended, creating new classes which retain characteristics of the base class. Involves a superclass and subclass. The subclass inherits the members of the superclass, on top of which it can add its own members.
+
+```scala
+// use extends keyword
+
+// Polygon.scala
+class Polygon {
+  def area: Double = 0.0
+}
+
+object Polygon {
+  def main(args: Array[String]) {
+    var poly = new Polygon
+    var rect = new Rectangle(55.2, 20.0)
+    printArea(poly) // 0.0
+    printArea(rect) // 1104.0
+  }
+  def printArea(p: Polygon) {
+    println(p.area)
+  }
+}
+
+// Rectangle.scala
+class Rectangle(var width: Double, var height: Double) extends Polygon {
+  override def area: Double = width * height
+}
+```
 
 
-
-
-
-
-Objects are classes which are already instantiated (single-ton). This means you cannot use the new keyword to create a new instant.
 
 
 
