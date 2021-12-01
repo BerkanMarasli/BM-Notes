@@ -545,9 +545,74 @@ print(opt.isEmpty) // true for None, false for Some
 
 
 
+## Higher-Order Methods
 
+Doesnt modify original collection so should be stored in a new variable.
 
+map - iterate over a collection (List, Array, etc) and then apply a function to each element.
 
+filter - iterate over a collection and filter the collection based on a condition.
+
+```scala
+lst.map(operation)
+
+val lst = List(1, 2, 3)
+val map = Map(1 -> "Tom", 2 -> "Max", 3 -> "John")
+println(lst.map(_ * 2)) == println(lst.map(x => x * 2)) // returns List(2, 4, 6)
+println(map.map(x => x)) // returns List((1,Tom), (2,Max), (3,John))
+println(map.mapValues(x => "y" + x)) // returns Map(1 -> "yTom", 2 -> "yMax", 3 -> "yJohn")
+
+println("hello".map(_.toUpper)) // returns "HELLO"
+
+// flatten
+println(List(List(1,2,3), List(3,4,5))) // returns List(List(1,2,3), List(3,4,5))
+println(List(List(1,2,3), List(3,4,5)).flatten) // returns List(1,2,3,3,4,5)
+
+// flatMap
+println(lst.flatMap(x => List(x, x+1))) // returns List(1,2,2,3,3,4)
+
+// filter
+println(lst.filter(x => x % 2 == 0)) // returns List(2)
+```
+
+reduce (Left/Right) - reduces all elements to return one value using an accumulator, currentVal approach.
+
+fold (Left/Right) - specify start value and then apply reduce
+
+scan (Left/Right) - same as fold... but gives map of intermediate result (list of the results along the way).
+
+```scala
+val lst1 = List(1, 2, 3, 5, 7, 10, 13)
+val lst2 = List("A", "B", "C")
+
+// reduce
+println(lst1.reduceLeft(_ + _)) == println(lst1.reduceLeft((x,y) => x + y)) // returns 41
+println(lst2.reduceLeft(_ + _)) // returns ABC
+
+// reduce Left vs Right - indicates whether first value is on the left or right of the collection
+println(lst1.reduceLeft(_ - _)) // returns -39
+println(lst1.reduceRight(_ - _)) // returns 7
+```
+
+```scala
+val lst1 = List(1, 2, 3, 5, 7, 10, 13)
+val lst2 = List("A", "B", "C")
+
+// fold - can pass initial argument (performs same as reduce)
+.foldLeft(initialValue)(operation))
+println(lst1.foldLeft(100)(_ + _)) // returns 141 (100 + 41 from reduce above)
+println(lst1.foldLeft("z")(_ + _)) // returns zABC
+```
+
+```scala
+val lst1 = List(1, 2, 3, 5, 7, 10, 13)
+val lst2 = List("A", "B", "C")
+
+// scan
+.scanLeft(initialValue)(operation))
+println(lst1.foldLeft(100)(_ + _)) // returns List(100, 101, 103, 106, 111, 118, 128, 141)
+println(lst1.foldLeft("z")(_ + _)) // returns List(z, zA, zAB, zABC)
+```
 
 
 
