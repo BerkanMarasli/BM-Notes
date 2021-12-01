@@ -519,6 +519,32 @@ myTuple._3._2 // returns 3
 
 
 
+## Options type
+
+Container that can give you two values (instance of Some or None).
+
+```scala
+// Example code
+val lst = List(1, 2, 3)
+val map = Map(1 -> "Tom", 2 -> "Max", 3 -> "John")
+println(lst.find(_ > 6)) // returns None --- .find has a return type Option[Int]
+println(lst.find(_ > 2)) // returns Some(3)
+println(map.get(1)) // returns Some("Tom") --- .get has a return type Option[String]
+println(map.get(4)) // returns None
+
+// Extract value from Some
+println(lst.find(_ > 2).get) // returns 3
+println(map.get(1).get) // returns "Tom"
+// ^ upgrade from above to avoid exception
+println(lst.find(_ > 3).getOrElse("No element found")) // "No element found"
+
+// Define an option
+val opt : Option[Int] = Some(5) or None (empty)
+print(opt.isEmpty) // true for None, false for Some
+```
+
+
+
 
 
 
