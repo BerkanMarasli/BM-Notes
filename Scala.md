@@ -467,7 +467,30 @@ for (i <- setName) {
 
 
 
+## Maps
 
+Collection of key value pairs. Keys are unique.
+
+Two types of maps: mutable and immutable. All maps are immutable by default.
+
+```scala
+val mapName : Map[keyDataType, valueDataType] = Map(key -> value, ...)
+
+// Access specific value
+mapName(key)
+
+.keys - all keys of the Map (returns a Set)
+.values - all values of the Map
+.isEmpty - checks if Map is empty (returns a boolean)
+.contains(key) - checks if key is present in Map (returns a boolean)
+.size - returns number of key value pairs in Map
+
+// Concatinate two Maps
+mapOne ++ mapTwo
+
+// Iterate using foreach
+mapName.keys.foreach { key => println("key " + key); println("value " + mapName(key))}
+```
 
 
 
