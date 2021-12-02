@@ -727,6 +727,16 @@ abstract class Polygon {
 new Polygon // exception
 ```
 
+### Methods
+
+```scala
+// .copy
+case class Rectangle(val width : Int, val height : Int) {
+}
+val smallRectangle = Rectangle(width = 3, height = 4)
+val largeRectangle = smallRectangle.copy(width = smallRectangle.width * 2)
+```
+
 
 
 ## Traits
@@ -735,7 +745,7 @@ Scala doesnt allow multiple inhertience (extends) from more than one class.
 
 Interface - describes a set of methods and properties that an implementing class must have.
 
-Traits - partially implemented interfaces.
+Traits - partially implemented interfaces. Do not introduce constructors.
 
 ```scala
 trait traitName {
