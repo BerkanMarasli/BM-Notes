@@ -1085,15 +1085,151 @@ There are lots of things that we can do with objects that we can’t do with met
 
 <br>
 
-### Companion Objects
+### Companion Objects (Multiple Constructors)
 
+Sometimes we want to create a method that logically belongs to a class but is independent of any particular object.
+One common use case is auxiliary constructors. Although Scala does have syntax that lets us define multiple constructors for a class, Scala programmers almost always prefer to implement additional constructors as `apply` methods on an object with the same name as the class. We refer to the object as the *companion object* of the class.
 
+```scala
+// Example of use
 
+class Timestamp(val seconds: Long)
 
+object Timestamp {
+  def apply(hours: Int, minutes: Int, seconds: Int): Timestamp = new Timestamp(hours*60*60 + minutes*60 + seconds)
+}
 
+Timestamp(1, 1, 1).seconds // res0: Long = 3661
 
+// It is important to note that the companion object is not an instance of the class—it is a singleton object with its own type
+Timestamp // res1: Timestamp.type = Timestamp$@137bf92e
+```
+
+```scala
+// Companion Object Syntax
+
+class className {}
+object className {}
+```
+
+Summary:
+
+- Companion objects provide us with a means to associate functionality with a class without associating it with any instance of that class.
+- They are commonly used to provide additional constructors.
+- A companion object has the same name as its associated class. This doesn’t cause a naming conflict because Scala has two namespaces: the namespace of values and the namespace of types.
+- A companion object must be defined in the same file as the associated class.
 
 <br>
+
+### Case Classes
+
+Case classes are an exceptionally useful shorthand for defining a class, a companion object, and a lot of sensible defaults in one go.
+They are ideal for creating lightweight data-holding classes with the minimum of hassle.
+They are created by prepending a class definiton with the keyword `case`.
+whenever we declare a case class, Scala automatically generates a class and companion object.
+
+#### Features of a case class
+
+1. A field for each constructor argument - we don't need to write `val` in our constructor defintion (no harm in doing so).
+2. A default toString method that prints a sensible constructor-like representation of the class (no more @ signs and hex numbers).
+3. Sensible `equals`, and `hashCode` methods that operate on the field values in the object.
+
+This makes it easy to use case classes with collections like `Lists`,  `Sets`, and `Maps`.
+It also means we can compare objects on the basis of their contents rather than their reference identity.
+
+```scala
+new Person("Berkan", "Marasli").equals(new Person("Berkan", "Marasli")) // res0: Boolean = true
+new Person("Berkan", "Marasli") == new Person("Berkan", "Marasli") // res1: Boolean = true
+```
+
+4. A `copy` method that creates a new object with the same field values as the current one.
+
+```scala
+berkan.copy() // res0: Person = Person(Berkan, Marasli)
+
+// Creates and returns a new object of the class rather than returning the current one
+
+/*
+The copy method actually accepts optional parameters matching each of the constructor parameters. If a parameter is specified the new object uses that value instead of the existing value from the current object. This is ideal for use with keyword parameters to let us copy an object while changing the values of one or more fields.
+*/
+berkan.copy(firstName = "Berkan2") // res0: Person = Person(Berkan2, Marasli)
+berkan.copy(lastName = "Marasli2") // res0: Person = Person(Berkan, Marasli2)
+```
+
+5. Case classes implement two traits: `java.io.Serializable` and `scala.Product`. Neither are used directly. The latter provides methods for inspecting the number of fields and the name of the case class.
+
+<br>
+
+#### Features of a case class companion object
+
+The companion object contains an `apply` method with the same arguments as the class constructor. Scala programmers tend to prefer the `apply` method over the constructor for the brevity of omitting `new`, which makes constructors much easier to read inside expressions.
+Finally, the companion object also contains code to implement an extractor pattern for use in pattern matching.
+
+```scala
+// Case Class Declaration Syntax
+
+case class className(parameter: type, ...) {
+  declarationOrExpression
+}
+```
+
+<br>
+
+#### Case Objects
+
+A final note. If you find yourself defining a case class with no constructor arguments you can instead a define a *case object*. A case object is defined just like a regular singleton object, but has a more meaningful `toString` method and extends the `Product` and `Serializable` traits.
+
+```scala
+case object Citizen {
+  def firstName = "John"
+  def lastName = "Doe"
+  def name = firstName + " " + lastName
+}
+
+Citizen.toString // res0: String = Citizen
+```
+
+<br>
+
+### Pattern Matching
+
+With case classes, you can interact with objects via pattern matching (instead of calling methods and accessing fields).
+Pattern matching is like an extended `if` expression that allows us to evaluate an expression depending on the "shape" of the data.
+
+```scala
+// Example of use
+
+case class Person(firstName: String, lastName: String)
+
+object Stormtrooper {
+  def inspect(person: Person): String = person match {
+    case Person("Luke", "Skywalker") => "Stop, rebel scum!"
+    case Person("Han", "Solo") => "Stop, rebel scum!"
+    case Person(first, last) => s"Move along, $first"
+  }
+}
+
+Stormtrooper.inspect(Person("Berkan", "Marasli")) // res0: String = Move along, Berkan
+Stormtrooper.inspect(Person("Han", "Solo")) // res1: String = Stop, rebel scum!
+```
+
+A pattern can be one of:
+
+- a name, binding any value to that name
+- an underscore, matching any value and ignoring it
+- a literal, matching the value the literal denotes
+- a constructor-style pattern for a case class
+
+```scala
+1. A name, which matches any value at that position and binds it to the given name. For example, the pattern Person(first, last) binds the name first to the value "Noel", and the name last to the value "Welsh".
+2. An underscore (_), which matches any value and ignores it. For example, as Stormtroopers only care about the first name of ordinary citizens we could just write Person(first, _) to avoid binding a name to the value of the lastName.
+3. A literal, which successfully matches only the value the literal respresents. So , for example, the pattern Person("Han", "Solo") matches the Person with first name "Han" and last name "Solo".
+4. Another case class using the same constructor style syntax.
+```
+
+<br>
+
+## Modelling Data with Traits
 
 
 
