@@ -1,5 +1,7 @@
 # Scala
 
+INSERT PROGRAMMINGKNOWLEDGE SCALA TUTORIAL VIDEO LINK USED TO CREATE THIS SECTION.
+
 
 
 ## Printing
@@ -739,7 +741,7 @@ val largeRectangle = smallRectangle.copy(width = smallRectangle.width * 2)
 
 
 
-## Traits
+### Traits
 
 Scala doesnt allow multiple inhertience (extends) from more than one class.
 
@@ -768,11 +770,330 @@ class Rectangle extends Polygon with Shape {
 
 
 
+### Abstract Classes vs Traits
+
+Useful YouTube video explaining the concept: https://www.youtube.com/watch?v=_7ULjOILxhI
 
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Testing (ScalaTest)
+
+
+
+to add to notes:
+
+- ??? allows the code to compile without inserting actual code. useful when constructing a method...
+- When u think for loop is JS, think map in Scala
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Essential Scala - Noel Welsh and Dave Gumell
+
+Link to book: https://books.underscore.io/essential-scala/essential-scala.html
+
+<br>
+
+## Expressions, Types and Values
+
+#### Theory
+
+A Scala program consists of two stages: compile-time and run-time.
+Compilation is a process of checking that a program makes sense; both syntactially correct and type correct.
+Even though a program successfully compiles it can still fail at run time; dividing an integer by zero causes a run-time error in Scala. The type of integers, `Int`, allows division so the program type checks successfully. However, at run-time the program fails because there is no `Int` that can represent the result of division.
+
+The defining characteristic of an expression is that it evaluates to a value.
+A value is information stored in the computer's memory and exists at run-time.
+In Scala, all values are objects.
+
+Types are restrictions on our programs that limit how we can manipulate objects, forcing us to write programs that give a consistent interpretation to values.
+Expressions have types but values do not. We cannot inspect an arbitrary piece of the computer's memory and divine how to interpret it without knowing the program that created it.
+Types exist at compile-time.
+This means type information does not need to be stored with value in memory; a process called type erasure.
+
+Summary:
+
+- Expressions are the parts of a program that evaluate to a value. They are the major part of a Scala program.
+- Expressions have types, which express some restrictions on programs. During compile-time the types of our programs are checked. If they are inconsistent then compilation fails and we cannot evaluate, or run, our program.
+- Values exist in the computer's memory, and are what a running program manipulates. All values in Scala are objects.
+
+<br>
+
+#### Scala's Type Hierarchy
+
+![](/Users/berkanmarasli/Downloads/Scala's Type Hierarchy.svg)
+
+Scala has a grand supertype called `Any`, under which there are two types, `AnyVal` and `AnyRef`. `AnyVal` is the supertype of all value types, which `AnyRef` is the supertype of all “reference types” or classes. All Scala and Java classes are subtypes of `AnyRef`. There are two special types at the *bottom* of the hierarchy. `Nothing` is the type of `throw` expressions, and `Null` is the type of the value `null`. These special types are subtypes of everything else, which helps us assign types to `throw` and `null` while keeping other types in our code sane.
+
+<br>
+
+### Objects
+
+An object is a grouping of data and operations on that data.
+The operations are known as methods. Some methods accept paramters or arguments.
+The data is stored in fields.
+
+```scala
+// Infix Operator Notation
+
+/*
+Any Scala expression written a.b(c) with exactly 1 argument can also be written a b c
+Note that a b c d e is equivalent to a.b(c).d(e), not a.b(c, d, e)
+*/
+
+"the quick brown fox".split(" ") == "the quick brown fox" split " "
+```
+
+Summary:
+
+- All Scala values are objects. We interact with objects by calling methods on them.
+- The syntax for a method call is `anExpression.methodName(parameter, ...)` or `anExpression methodName parameter`.
+- Scala has very few operators - almost everything is a method call. We use syntactic conventions like infix operator notation to keep our code simple and readable, but we can always fall back to standard method notation.
+- Scala's focus on programming with expressions allows us to write much shorter code. It also allows us to reason about code in a very intuitive way using values and types.
+
+<br>
+
+### Literal Object Data Types
+
+#### Numbers
+
+| Data Type | Representation        |
+| --------- | --------------------- |
+| Int       | 32-bit integers       |
+| Long      | 64-bit integers       |
+| Float     | 32-bit floating point |
+| Double    | 64-bit floating point |
+
+Scala also has 16-bit `Short` integers and 8-bit `Bytes`s, but there is no literal syntax for creating them. Instead, create them using methods called `toShort` and `toByte`.
+
+#### Boolean
+
+`true` or `false`
+
+#### Characters
+
+`Chars` are 16-bit Unicode values written as a single character enclosed in single quotes.
+
+```scala
+'a' // res0: Char = a
+```
+
+#### Strings
+
+```scala
+"this is a string" // res0: String = this is a string
+```
+
+#### Null
+
+Not used in Scala. Scala has the means to define opertional values using `Option`.
+
+```scala
+null // res0: Null = null
+```
+
+#### Unit
+
+Unit is the result of expressions that evaluate to no interesting value.
+Used as a placeholder for expressions that don't yield a useful value.
+
+```scala
+() // Unit, written ()
+:type () // Unit
+:type println("something") // Unit
+```
+
+<br>
+
+### Object Literals
+
+When we write an object literal we use a declaration, which is a different kind of program to an expression.
+A declaration does not evaluate to a value. Instead it associates a name with a value.
+This name can then be used to refer to the value in other code.
+
+```scala
+// Declare empty object
+
+object Test {}
+
+/*
+This is not an expression - it does not evaluate to a value. Rather it binds a name (Test) to a value (an empty object)
+Once we have bound the name Test we can use it in expressions, where it evaluates to the object we have declared
+*/
+
+Test // res0: Test.type = Test$@779732fb
+
+/*
+This expression is equivalent to writing a literal like 123 or "abc"
+Note that the type of the object is reported as Test.type
+This is not like any type we’ve seen before—it’s a new type, created just for our object, called a singleton type
+We cannot create other values of this type
+*/
+```
+
+```scala
+// Method Declaration Syntax
+
+def methodName(paramterName: type, ...): resultType = bodyExpression
+```
+
+```scala
+// Field Declaration Syntax
+
+val fieldName: type = valueExpression
+var fieldName: type = valueExpression
+```
+
+The body expression of a field is run only once after which the final value is stored in the object and the expression is never evaluated again.
+The body of a method, on the other hand, is evaluated every time we call the method.
+
+<br>
+
+### Compound Expressions
+
+#### Conditionals
+
+Scala's conditional is an expression - it has a type and returns a value.
+
+```scala
+// if statement
+
+if (1 < 2) "Yes" else "No" // res0: String = Yes
+```
+
+#### Blocks
+
+Blocks are expressions that allow us to sequence computations together.
+They are written as a pair of braces containing sub-expressions separated by semicolons or newlines.
+A block is also an expression; it executes each of its sub-expressions in order and returns the type and value of the last expression.
+
+```scala
+// Block Expression Syntax
+
+{
+  declarationOrExpression ...
+  expression
+}
+```
+
+<br>
+
+## Objects and Classes
+
+A class is a template for creating objects that have similar methods and fields.
+In Scala a class also defines a type, and objects created from a class all share the same type.
+Like an object declaration, a class declaration binds a name and is not an expression. However, unlike an object name, we cannot use a class name in an expression.
+
+```scala
+// Example of use
+
+class Person {
+  val firstName = "Berkan"
+  val lastName = "Welsh"
+  def name = firstName + " " + lastName
+}
+
+Person // error
+val berkan = new Person // berkan: Person = Person@3a1d255f
+berkan.firstName // res0: String = Berkan
+
+// Can write a method that takes any Person
+object alien {
+  def greet(p: Person) = "Greetings, " + p.firstName + " " + p.lastName
+}
+```
+
+<br>
+
+#### Constructors
+
+A constructor allows us to pass parameters to new objects as we create them.
+The constructor parameters can only be used within the body of the class. In order to access them outside the object, we must declare a field or method using `val` or `def`. Scala provides a shorthand to overcome this where you can define a field inside the constructor.
+
+```scala
+// Class Declaration Syntax
+
+class className(val parameter: type, ...) {
+  declarationOrExpression ...
+}
+
+// Default and keyword parameters
+def greet(title: String = "Citizen", firstName: String = "Some") = "Greetings, " + title + " " + firstName
+greet("Busy") // incorrect -> res0: String = Greetings, Busy Some
+greet(firstName = "Busy") // correct -> res1: String = Greetings, Citizen Busy
+```
+
+<br>
+
+### Objects as Functions
+
+An object representing a computation - called functions, and are the basis of functional programming.
+
+#### Apply Method - Function Application Syntax
+
+In Scala, by convention, an object can be “called” like a function if it has a method called `apply`. Naming a method `apply` affords us a special shortened call syntax: `foo.apply(args)` becomes `foo(args)`.
+
+```scala
+// Example of use
+
+class Adder(amount: Int) {
+  def apply(in: Int): Int = in + amount
+}
+
+val add3 = new Adder(3) // add3: Adder = Adder@4185f338
+add3.apply(2) // res0: Int = 5
+add3(4) // shorthand for add3.apply(4) -> res1: Int = 7
+```
+
+With this one simple trick, objects can “look” syntactically like functions.
+There are lots of things that we can do with objects that we can’t do with methods, including assign them to variables and pass them around as arguments.
+
+<br>
+
+### Companion Objects
+
+
+
+
+
+
+
+<br>
 
 
 
