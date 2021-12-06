@@ -892,10 +892,45 @@ The forAll method takes as parameter a function that receives an arbitrary value
 
 ### Mocking
 
+Mock the components that the test unit is dependent on; provide a fake implementation of a component that can be subtituted to the componnent.
 
+ScalaMock is a mocking library that can be used.
 
 ### Integration Testing
 
+Process of testing a complete system, with no stubs or mocks. You need to programmatically set up the entire stack.
+
+MUnit lets you set up and shut down a resource for the lifetime of a single test.
+
+```scala
+// Http server example
+class HttpServerSuite extends munit.FunSuite {
+  val withHttpServer = FunFixture[HttpServer](
+  	setup = test => {
+      val httpServer = httpServer()
+      httpServer.start(8888)
+      httpServer
+    },
+    teardown = httpServer => httpServer.stop()
+  )
+  withHttpServer.test("server is running") { httpServer =>
+  	// Perform HTTP request here
+  }
+}
+
+/*
+Sometimes, it's considerably more performant to set up the stack once at the beginning, then run all the tests, and eventually shut down the system. We acheive that by overriding the methods beforeAll and afterAll of the FunSuite class.
+*/
+class HttpServerSuite extends munit.FunSuite {
+  val httpServer = HttpServer()
+  override def beforeAll(): Unit = httpServer.start(8888)
+  override def afterAll(): Unit = httpServer.stop()
+  
+  test("server is running") {
+    // Perform HTTP request here
+  }
+}
+```
 
 
 
@@ -904,7 +939,10 @@ The forAll method takes as parameter a function that receives an arbitrary value
 
 
 
-to add to notes:
+
+
+
+To add to notes:
 
 - ??? allows the code to compile without inserting actual code. useful when constructing a method...
 - When u think for loop is JS, think map in Scala
