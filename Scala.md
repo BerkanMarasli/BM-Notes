@@ -800,7 +800,107 @@ Useful YouTube video explaining the concept: https://www.youtube.com/watch?v=_7U
 
 
 
-## Testing (ScalaTest)
+## Testing (MUnit)
+
+Test files go under the `src/test/scala` directory.
+
+```scala
+// Add following settings to build.sbt file:
+libraryDependencies += "org.scalameta" %% "munit" % "0.7.29" % Test
+```
+
+### Unit Testing
+
+Test with parameters for which we know what the expected result should be.
+
+- A test suite is a class that extends `munit.FunSuite`.
+- Use `test` and `assetEquals` methods, from `munit.FunSuite` to write test specifications.
+
+```scala
+class TestFile extends munit.FunSuite {
+  test("testName") {
+    val obtained = add(1,1)
+    val expected = 2
+    assertEquals(obtained, expected)
+  }
+  test("test2Name") {
+    // Test specification
+  }
+}
+```
+
+### Property-Based Testing
+
+Specify general properties that must be correct for all possible inputs.
+
+ScalaCheck is a library for doing property-based testing and integrates with MUnit.
+
+```scala
+// Add following settings to build.sbt file:
+libraryDependencies += "org.scalacheck" %% "scalacheck" % "1.14.1" % "test"
+```
+
+- A test suite containing properites is a class that extends `munit.ScalaCheckSuite`.
+- Use `property` method to define a property.
+
+```scala
+import org.scalacheck.Prop.forAll
+
+class ProgramProperties extends munit.ScalaCheckSuite {
+  // Will fail for test case n = 1
+  property("fibonacci(n) == fibonacci(n-1) + fibonacci(n-2)") {
+    forAll { (n: Int) =>
+      fibonacci(n) == fibonacci(n-1) + fibonacci(n-2)
+    }
+  }
+  // Specify range of values n >= 3
+  val fibonacciDomain: Gen[Int] = Gen.choose(3, Int.MaxValue)
+  property("fibonacci(n) == fibonacci(n-1) + fibonacci(n-2)") {
+    forAll(fibonacciDomain) { (n: Int) =>
+      fibonacci(n) == fibonacci(n-1) + fibonacci(n-2)
+    }
+  }
+  // Or exclude within forAll
+  val fibonacciDomain: Gen[Int] = Gen.choose(1, Int.MaxValue)
+  property("fibonacci(n) == fibonacci(n-1) + fibonacci(n-2)") {
+    forAll(fibonacciDomain.suchThat(n => n >= 3)) { (n: Int) =>
+      fibonacci(n) == fibonacci(n-1) + fibonacci(n-2)
+    }
+  }
+  
+  // ==============================================================
+  
+  // Find edge cases: fibonacci(48) = -1323752223 because of type Int
+  property("fibonacci numbers are positive") {
+    forAll(fibonacciDomain) { (n: Int) =>
+      fibonacci(n) >= 0
+    }
+  }
+  // Correct:
+  val fibonacciDomain: Gen[Int] = Gen.choose(1, 47)
+  property("fibonacci(n) == fibonacci(n-1) + fibonacci(n-2)") {
+    forAll(fibonacciDomain.suchThat(n => n >= 3)) { (n: Int) =>
+      fibonacci(n) == fibonacci(n-1) + fibonacci(n-2)
+    }
+  }
+}
+
+/*
+The forAll method takes as parameter a function that receives an arbitrary value (here n, of type Int) and reutrns a Boolean value.
+*/
+```
+
+### Mocking
+
+
+
+### Integration Testing
+
+
+
+
+
+
 
 
 
@@ -808,6 +908,7 @@ to add to notes:
 
 - ??? allows the code to compile without inserting actual code. useful when constructing a method...
 - When u think for loop is JS, think map in Scala
+- In Scala, think of recursion and not in terms of loops
 
 
 
@@ -1230,6 +1331,114 @@ A pattern can be one of:
 <br>
 
 ## Modelling Data with Traits
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Rock the JVM - Scala at Light Speed
+
+## Collections
+
+### Lists
+
+```scala
+val aList = List(1,2,3,4,5)
+val firstElement = aList.head
+val remainingElements = aList.tail
+val aPrependedList = 0 :: aList // List(0,1,2,3,4,5)
+val anExtendedList = 0 +: aList :+ 6 // List(0,1,2,3,4,5,6)
+```
+
+### Sequences
+
+Sequences are used to access specific elements.
+
+```scala
+val aSequence: Seq[Int] = Seq(1,2,3)
+val accessedElement = aSequence(1) // Element at index 1 is 2
+```
+
+### Vectors
+
+Vectors are a fast implementation of Sequences.
+
+```scala
+val aVector = Vector(1,2,3,4,5)
+```
+
+### Sets
+
+Sets allow for no duplicates.
+
+```scala
+val aSet = Set(1,2,3,4,1,2,3) // Set(1,2,3,4)
+val setHas5 = aSet.contains(5) // false
+val anAddedSet = aSet + 5 // Set(1,2,3,4,5)
+val aRemovedSet = aSet - 3 // Set(1,2,4)
+```
+
+### Ranges
+
+```scala
+val aRange = 1 to 1000
+val twoByTwo = aRange.map(x => x * 2).toList // List(2,4,6,...2000)
+```
+
+### Tuples
+
+Groups of values under the same value.
+
+```scala
+val aTuple = ("Berkan", 1998, true)
+```
+
+### Maps
+
+Key - Value pairs.
+
+```scala
+val aPhonebook: Map[String, Int] = Map(
+	("Berkan", 078123),
+  "Serkan" -> 079635
+)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
