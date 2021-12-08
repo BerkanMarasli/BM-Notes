@@ -1452,7 +1452,54 @@ val aPhonebook: Map[String, Int] = Map(
 )
 ```
 
+## Pattern Matching
 
+- If pattern match doesn't match any case, it will throw a MatchError
+- Pattern matching will try all cases in sequence (in order)
+
+### Switch Expression
+
+```scala
+val anInteger = 55
+val order = anInteger match {
+  case 1 => "first"
+  case 2 => "second"
+  case _ => anInteger + "th"
+}
+println(order) // 55th
+```
+
+### Case Class Decomposition (by structure)
+
+```scala
+case class Person(name: String, age: Int)
+val berkan = Person("Berkan", 23)
+val personGreeting = berkan match {
+  case Person(n, a) => s"My name is $n and I am $a years old"
+  case _ => "Something else"
+}
+println(personGreeting) // My name is Berkan and I am 23 years old
+```
+
+### Tuple Decomposition (by structure)
+
+```scala
+val aTuple = ("Berkan Marasli", "Rock")
+val musicDescription = aTuple match {
+  case (name, genre) => s"$name likes $genre"
+  case _ => "Something else"
+}
+```
+
+### List Decomposition (by structure)
+
+```scala
+val aList = List(1,2,3)
+val listDescription = aList match {
+  case List(_, 2, _) => "List containing 2 on its second position"
+  case _ => "Something else"
+}
+```
 
 
 
