@@ -117,7 +117,7 @@ path("pathName" / RemainingPath) { i =>
 ```scala
 post {
   entity(as[type]) { account =>
-    comeplete()
+    complete()
   }
 }
 // type can be String, case class e.g. EmailAccount
