@@ -1386,6 +1386,8 @@ A pattern can be one of:
 
 # Rock the JVM - Scala at Light Speed
 
+<br>
+
 ## Collections
 
 ### Lists
@@ -1451,6 +1453,8 @@ val aPhonebook: Map[String, Int] = Map(
   "Serkan" -> 079635
 )
 ```
+
+<br>
 
 ## Pattern Matching
 
