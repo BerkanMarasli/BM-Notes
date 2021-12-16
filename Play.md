@@ -319,6 +319,35 @@ def action = Action { request =>
 
 ### Tweaking the Result
 
+- We can cahnge the `Content-Type` header (without changing the content) using the `as` method
+- We can add and/or alter HTTP headers using `withHeaders`
+- We can add and/or alter cookies using `withCookies`
+
+These methods can be chained, allowing us to create the Result, tweak it, and return it in a single expression:
+
+```scala
+def exampleAction = Action { request =>
+	Ok("Success").
+  as("text/plain").
+  withHeaders(
+  	"Cache-Control" -> "no-cache, no-store, must-revalidate",
+    "Pragma" -> "no-cache",
+    "Expires" -> "0",
+    // etc..
+  ).
+  withCookies(
+  	Cookie(name = "DemoCookie", value = "DemoCookieValue"),
+    Cookie(name = "OtherCookie", value = "OtherCookieValue")
+  )
+}
+```
+
+<br>
+
+
+
+## Handling Failure
+
 
 
 
