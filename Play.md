@@ -4,7 +4,11 @@
 
 https://books.underscore.io/essential-play/essential-play.html#constructing-results
 
+<br>
 
+
+
+# Play Basics
 
 <br>
 
@@ -346,9 +350,7 @@ def exampleAction = Action { request =>
 
 
 
-## Handling Failure
-
-
+# Working with JSON
 
 
 
