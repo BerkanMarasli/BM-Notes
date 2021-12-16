@@ -165,6 +165,8 @@ def handleJson(data: JsValue): Result = ???
 def handleXml(data: NodeSeq): Result = ???
 ```
 
+<br>
+
 #### Custom Body Parsers
 
 if we are certain about the data type we want in a particular Action, we can specify a body parser to restrict it to a specific type. Play returns a 400 Bad Request response to the client if it cannot parse the request as the relevant type:
@@ -180,7 +182,43 @@ def index = Action(parse.json) { request =>
 
 We can even implement our own custom body parsers to parse exotic formats.
 
+<br>
+
 ### Headers and Cookies
+
+`Request` contains two methods for inspecting HTTP headers:
+
+- the `headers` method returns a [play.api.mvc.Headers](https://www.playframework.com/documentation/2.3.x/api/scala/index.html#play.api.mvc.Headers) object for inspecting general headers
+- the `cookies` method returns a [play.api.mvc.Cookies](https://www.playframework.com/documentation/2.3.x/api/scala/index.html#play.api.mvc.Cookies) object for inspecting the `Cookies` header
+
+Values are treated as `Strings` throughout. Play doesn't attempt to parse headers as dedicated Scala types.
+
+```scala
+object RequestDemo extends Controller {
+  def headers = Action { request =>
+  	val headers: Headers = request.headers
+    val ucType: Option[String] = headers.get("Content-Type")
+    val lcType: Option[String] = headers.get("content-type")
+    
+    val cookies: Cookies = request.cookies
+    val cookie: Option[Cookie] = cookies.get("DemoCookie")
+    val value: Option[String] = cookie.map(_.value)
+    
+    Ok(Seq(
+      s"Headers: $headers",
+      s"Content-Type: $ucType",
+      s"content-type: $lcType",
+      s"Cookies: $cookies",
+      s"Cookie value: $value"
+    ) mkString "\n")
+  }
+}
+```
+
+Note:
+
+- `Headers.get` method is case insensitive
+- Cookie names are case sensitive
 
 
 
