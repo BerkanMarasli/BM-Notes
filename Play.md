@@ -2,6 +2,12 @@
 
 <br>
 
+https://books.underscore.io/essential-play/essential-play.html#constructing-results
+
+
+
+<br>
+
 The backbone of a Play web application is made up of `Actions`, `Controllers`, and routes:
 
 - `Actions` are functions from `Requests` to `Results`
@@ -277,6 +283,41 @@ val result3: Result = Status(401)("Access denied!")
 <br>
 
 ### Adding Content
+
+Play adds `Content-Type` headers to our `Results` based on the type of data we provide.
+String -> text/plain
+play.api.libs.json.JsValue -> application/json
+
+The process of creating a `Result` is type-safe and Play determines the method of serialisation based on the type we give it.
+As a consequence the final steps in an `Action` tend to be as follows:
+
+- Convert the result of action to a type that Play can serialise
+- Use the serialisable data to create a Result
+- Tweak HTTP headers and so on.
+- Return the Result
+
+#### Custom Result Types
+
+```scala
+// We have a custom library for manipulating iCal calendar files:
+case class ICal(/* ... */)
+
+// We implement an implicit `Writeable[ICal]`:
+implicit object ICalWriteable extends Writeable[ICal] {
+  // ...
+}
+
+// Now our actions can serialize `ICal` results:
+def action = Action { request =>
+  val myCal: ICal = ICal(/* ... */)
+
+  Ok(myCal) // Play uses `ICalWriteable` to serialize `myCal`
+}
+```
+
+<br>
+
+### Tweaking the Result
 
 
 
