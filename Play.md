@@ -13,6 +13,10 @@ Routes go in the conf/routes file (no filename extension).
 
 <br>
 
+
+
+
+
 ## Routes
 
 ### Path Parameters
@@ -119,6 +123,10 @@ GET /list-example controllers.MyController.listExample(arg: List[Int])
 Play also generates *reverse routes* that map method calls back to URIs. These are placed in a synthetic `routes` package that we can access from our Scala code.
 
 <br>
+
+
+
+
 
 ## Parsing Requests
 
@@ -237,6 +245,38 @@ val path: String = request.path
 // The query string, split into name/value pairs:
 val query: Map[String, Seq[String]] = request.queryString
 ```
+
+<br>
+
+
+
+
+
+## Constructing Results
+
+Create `Results` (final step of any Action), populate them with content, and add headers and cookies.
+
+### Status Code
+
+Play provides a convenient set of factory objects for creating `Results`. These are defined in the [play.api.mvc.Results](https://www.playframework.com/documentation/2.3.x/api/scala/index.html#play.api.mvc.Results) trait and inherited by [play.api.mvc.Controller](https://www.playframework.com/documentation/2.3.x/api/scala/index.html#play.api.mvc.Controller):
+
+| Constructor         | HTTP status code                   |
+| ------------------- | ---------------------------------- |
+| Ok                  | 200 Ok                             |
+| NotFound            | 404 Not Found                      |
+| InternalServerError | 500 Internal Server Error          |
+| Unauthorised        | 401 Unauthorised                   |
+| Status(number)      | number (an Int) - anything we want |
+
+```scala
+val result1: Result = Ok("Success!")
+val result2: Result = NotFound("Cannot be found!")
+val result3: Result = Status(401)("Access denied!")
+```
+
+<br>
+
+### Adding Content
 
 
 
