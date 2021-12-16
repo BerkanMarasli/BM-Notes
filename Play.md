@@ -220,6 +220,24 @@ Note:
 - `Headers.get` method is case insensitive
 - Cookie names are case sensitive
 
+### Methods and URIs
+
+The `Request` object also provides methods that are of occasional use:
+
+```scala
+// The HTTP method ("GET", "POST", etc)
+val method: String = request.method
+
+// The URI, including path and query string
+val uri: String = request.uri
+
+// The path of the URI, without the query string
+val path: String = request.path
+
+// The query string, split into name/value pairs:
+val query: Map[String, Seq[String]] = request.queryString
+```
+
 
 
 
