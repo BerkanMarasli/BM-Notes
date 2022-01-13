@@ -6,7 +6,9 @@ https://books.underscore.io/essential-play/essential-play.html#constructing-resu
 
 <br>
 
+[TOC]
 
+<br>
 
 # Play Basics
 
@@ -352,9 +354,142 @@ def exampleAction = Action { request =>
 
 # Working with JSON
 
+Play ships with a built-in library for reading, writing, and manipulating JSON data, unsurpisingly called `play-json`.
+
+<br>
+
+## Modelling JSON
+
+![](/Users/berkanmarasli/Desktop/Screenshot 2022-01-13 at 01.13.54.png)
+
+- `Json.arr(...)` creates a JsArray. The method takes any number of parameters, each of which must be a JsValue or a type that can be implicitly converted to one.
+- Json.obj(...) creates a JsObject. The method takes any number of parameters, each of which must be a pair of a string and a JsValue or convertible.
+
+![Screenshot 2022-01-13 at 01.17.25](/Users/berkanmarasli/Desktop/Screenshot 2022-01-13 at 01.17.25.png)
+
+### JSON Requests and Results
+
+If writing an API endpoint that must accept JSON, use the built-in JSON body parser to receive a `Request[JsValue]` instead. Play will respond with a 400 Bad Request result if the reqiest does not contain JSON:
+
+![Screenshot 2022-01-13 at 01.22.45](/Users/berkanmarasli/Desktop/Screenshot 2022-01-13 at 01.22.45.png)
+
+![Screenshot 2022-01-13 at 01.23.12](/Users/berkanmarasli/Desktop/Screenshot 2022-01-13 at 01.23.12.png)
+
+As Play extracts JsValues from incoming Requests, typically you do not directly parse stringified JSON. However, if you do:
+
+![Screenshot 2022-01-13 at 01.26.56](/Users/berkanmarasli/Desktop/Screenshot 2022-01-13 at 01.26.56.png)
+
+And the opposite is `Json.stringify`:
+
+![Screenshot 2022-01-13 at 01.27.40](/Users/berkanmarasli/Desktop/Screenshot 2022-01-13 at 01.27.40.png)
+
+### Deconstructing and Traversing JSON Data
+
+#### Pattern Matching
+
+One way of deconstructing JsValues is to use pattern matching. This is convenient as the subtypes are all case classes and case objects:
+
+![Screenshot 2022-01-13 at 01.31.20](/Users/berkanmarasli/Desktop/Screenshot 2022-01-13 at 01.31.20.png)
+
+#### Traversal Methods
+
+Pattern matching only gets us so far. We can't easily search through the children of a JsObject or JsArray without looping. Fortunately, JsValue contains three methods to drill down to specific fields before we match:
+
+- `json \ "nameOfField"` extracts a field from json assuming (a) json is a JsObject and (b) the field "nameOfField" exists
+- `json(index)` extracts a field from json assuming (a) json is a JsArray and (b) the index exists
+- `json \\ "nameOfField"`  extracts all fields named "nameOfField" from json and any of its descendents
+
+![Screenshot 2022-01-13 at 01.38.00](/Users/berkanmarasli/Desktop/Screenshot 2022-01-13 at 01.38.00.png)
+
+The subtype JsUndefined is used by Play to represent the failure to find a field. In the example, the expression to calculate z actually fails twice: first at the call to apply(2) and second at the call to \ "name". The implementation of JsUndefined carries the errors over into the final result:
+
+![Screenshot 2022-01-13 at 01.41.33](/Users/berkanmarasli/Desktop/Screenshot 2022-01-13 at 01.41.33.png)
+
+#### Parsing Methods
+
+Can use two methods, `as` and `asOpt` to convert JSON data into regular Scala types.
+
+The `as` method is most useful when exploring JSON in the REPL or unit tests:
+
+![Screenshot 2022-01-13 at 01.44.49](/Users/berkanmarasli/Desktop/Screenshot 2022-01-13 at 01.44.49.png)
+
+If `as` cannot convert the data to the type requested, it throws a run-time exception (dangerous for production).
+
+The `asOpt` method provides a safer way to extract data - it attempts to parse the JSON as the desired type, and returns `None` if it fails. This is a better choice for use in application code:
+
+![Screenshot 2022-01-13 at 01.46.50](/Users/berkanmarasli/Desktop/Screenshot 2022-01-13 at 01.46.50.png)
+
+#### All Together
+
+Traversal and pattern matching are complimentary techniques for dissecting JSON data. We can extract specific fields using traversal, and pattern match on them to extract Scala values:
+
+![Screenshot 2022-01-13 at 01.49.19](/Users/berkanmarasli/Desktop/Screenshot 2022-01-13 at 01.49.19.png)
+
+<br>
+
+## Writing JSON
+
+The application code in a typical REST API operates on a domain model consisting of sealed traits and case classes. When we have finished an operation, we have to take the result, convert it to JSON, and wrap it in a Result to send it to the client.
+
+#### Writes
+
+We convert Scala values to JSON using the Play Writes trait:
+
+```scala
+trait Writes[A] {
+  def writes(value: A): JsValue
+}
+```
+
+Play provides built-in Writes for many standard data tyoes, and we can create Writes by hand for any data type we want to serialise.
+
+Play also provides a simple one-liner of defining a Writes for a case class:
+
+```scala
+case class Address(number: Int, street: String)
+
+val addressWrites: Writes[Address] = Json.writes[Address]
+```
+
+Json.writes is a macro that inspects the Address type and generates code to define a sensible Writes. The macro saves us some typing but it only works on case classes.
+
+addressWrites is an object that can serialise an Address to a JsObject with sensible field names and values:
+
+![Screenshot 2022-01-13 at 03.04.54](/Users/berkanmarasli/Desktop/Screenshot 2022-01-13 at 03.04.54.png)
+
+#### Implicit Writes
 
 
 
+
+
+
+
+
+
+
+
+
+
+<br>
+
+## Reading JSON
+
+
+
+<br>
+
+## JSON Formats
+
+
+
+<br>
+
+## Custom Formats
+
+
+
+<br>
 
 
 
