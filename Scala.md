@@ -1,10 +1,18 @@
 # Scala
 
-INSERT PROGRAMMINGKNOWLEDGE SCALA TUTORIAL VIDEO LINK USED TO CREATE THIS SECTION.
+
+
+[TOC]
 
 
 
-## Printing
+
+
+
+
+## Basics
+
+### Printing
 
 println - printing, and forcing a new line on the next print
 
@@ -21,7 +29,11 @@ print(10)
 // Hello World!10
 ```
 
-String interpolation - prefix with s and indicate with $
+<br>
+
+### String Interpolation
+
+Prefix with s and indicate with $ and {}
 
 ```scala
 val n : Int = 45
@@ -42,9 +54,9 @@ raw"New line \n. return: \r" // "New line \n. return: \r"
 // Type-safe string interpolation using f string interpolation...
 ```
 
+<br>
 
-
-## Types
+### Types
 
 | Type    | Description                            |
 | ------- | -------------------------------------- |
@@ -63,9 +75,9 @@ raw"New line \n. return: \r" // "New line \n. return: \r"
 | Any     | Supertype of any type                  |
 | AnyRef  | Supertype of any reference type        |
 
+<br>
 
-
-## Operations
+### Operations
 
 | Operation            | Example                                    | Example Result             |
 | -------------------- | ------------------------------------------ | -------------------------- |
@@ -77,15 +89,13 @@ raw"New line \n. return: \r" // "New line \n. return: \r"
 | && or \|\| (and, or) |                                            |                            |
 | += or -=             |                                            |                            |
 
+<br>
 
-
-## Variables
+### Variables
 
 val - immutable value (value cannot change after initialisation)
 
 var - mutable value (value can change after initialisation via assignment)
-
-Note:
 
 - Only classes can have declared but unassigned variables
 - Scala has built-in data type recognition
@@ -115,9 +125,11 @@ lazy val a : Int = 500 // val a : Int = <lazy> or lazy val a : Int
 val b : Int = a * 2 // val b : Int = 1000
 ```
 
+<br>
 
+## Statements
 
-## If else statements
+### If Else Statements
 
 ```scala
 if (expression) {
@@ -131,9 +143,9 @@ val varName = if (expression) doThis else doThis
 println(if (expression) doThis else doThis)
 ```
 
+<br>
 
-
-## While & do-while statements
+### While & Do-While Statements
 
 ```scala
 while (expression) {
@@ -146,9 +158,9 @@ do {
 } while (expression)
 ```
 
+<br>
 
-
-## For statements
+### For Statements
 
 For statement will automatically take the 'varName' as a var variable.
 
@@ -200,27 +212,25 @@ println(result)
 // List(1, 4, 9)
 ```
 
+<br>
 
+## Pattern Matching
 
-## Match expressions
+- If pattern match doesn't match any case, it will throw a MatchError
+- Pattern matching will try all cases in sequence (in order)
+
+### Switch Expression
 
 ```scala
-val age : Int = 18
-age match {
-  case 20 => println(age)
-  case 18 => println(age)
-  case 16 => println(age)
-  case _ => println("default case")
+val anInteger = 55
+val order = anInteger match {
+  case 1 => "first"
+  case 2 => "second"
+  case _ => anInteger + "th"
 }
+println(order) // 55th
 
-val result = age match {
-  case 20 => age
-  case 18 => age
-  case 16 => age
-  case _ => "default case"
-}
-println(result)
-
+// Another example
 val i : Int = 7
 i match {
   case 1 | 3 | 5 | 7 | 9 => println("odd")
@@ -229,7 +239,39 @@ i match {
 }
 ```
 
+### Case Class Decomposition (by structure)
 
+```scala
+case class Person(name: String, age: Int)
+val berkan = Person("Berkan", 23)
+val personGreeting = berkan match {
+  case Person(n, a) => s"My name is $n and I am $a years old"
+  case _ => "Something else"
+}
+println(personGreeting) // My name is Berkan and I am 23 years old
+```
+
+### Tuple Decomposition (by structure)
+
+```scala
+val aTuple = ("Berkan Marasli", "Rock")
+val musicDescription = aTuple match {
+  case (name, genre) => s"$name likes $genre"
+  case _ => "Something else"
+}
+```
+
+### List Decomposition (by structure)
+
+```scala
+val aList = List(1,2,3)
+val listDescription = aList match {
+  case List(_, 2, _) => "List containing 2 on its second position"
+  case _ => "Something else"
+}
+```
+
+<br>
 
 ## Functions
 
@@ -272,9 +314,9 @@ val add = (x : Int, y : Int) => x + y
 println(add(3, 5)) // 8
 ```
 
+<br>
 
-
-## Higher-order functions
+### Higher-Order Functions
 
 Higher-order functions can take functions as arugments and are able to return functions.
 
@@ -293,9 +335,9 @@ val result = math(5, 2, 10, (x,y) => x + y) // Passing annoymous function
 // The _ is known as a wildcard
 ```
 
+<br>
 
-
-## Partially Applied Functions
+### Partially Applied Functions
 
 Not providing all the arguments of a function.
 
@@ -308,9 +350,9 @@ val f = sum(10, _ : Int, _ : Int)
 sum(20, 30) // 60
 ```
 
+<br>
 
-
-## Closures
+### Closures
 
 A closure is a function which uses one or more variables declared outside this function.
 
@@ -328,9 +370,9 @@ val add = (x : Int) => x + number
 add(20) // 30
 ```
 
+<br>
 
-
-## Function currying
+### Function Currying
 
 Currying is the technique of transforming a function that takes multiple arguments into a function that takes a single argument.
 
@@ -354,23 +396,22 @@ val sum5 = addFCSimple(5)_
 sum5(10) // 5
 ```
 
+<br>
 
+## Collections
 
-## Strings
+### Strings
 
-Strings are assigned using double quotes "" only.
+- Strings are assigned using double quotes "" only
+- Scala makes use of Java methods for strings
 
-Scala makes use of Java methods for strings.
+<br>
 
+### Arrays
 
-
-## Arrays
-
-Data structure that can store FIXED SIZE sequential elements of SAME DATA TYPE.
-
-Arrays are zero indexed.
-
-Unassigned elements will contain the default value for that data type.
+- Arrays can store fixed size sequential elements of same data type
+- Arrays are zero indexed
+- Unassigned elements will contain the default value for that data type
 
 ```scala
 val arrayName : Array[dataType] = new Array[dataType](arraySize)
@@ -386,30 +427,29 @@ for (i <- 0 to (arrayName.length - 1)) {
 }
 ```
 
+<br>
 
+### Lists
 
-## Lists
-
-Arrays are mutable whereas lists are IMMUTABLE (cannot change element value of lists once assigned).
-
-Arrays are flat whereas lists represent LINKED LISTS.
-
-Lists are zero indexed.
+- Lists are immutable (arrays are mutable)
+- Lists represent linked lists (arrays are flat)
+- Lists are zero indexed
 
 ```scala
 val listName : List[dataType] = List(1, 2, 3, 4, 5)
 println(listName) // List(1, 2, 3, 4, 5)
 
-// :: prepends a single item (makes a new List so needs to be assigned to a new variable)
+// :: prepends a single item (creates new List => assign to new variable)
 1 :: List(2, 3) returns List(1, 2, 3)
-// ::: prepends a complete list (makes a new List so needs to be assigned to a new variable)
+// ::: prepends a complete list (creates new List => assign to new variable)
 List(1, 2) ::: List(3, 4) returns List(1, 2, 3 ,4)
-
 // Nil
 1 :: 5 :: 9 :: Nil returns List(1, 5, 9)
+// +: ... :+ extends a list
+0 +: List(1, 2) :+ 3 // List(0, 1, 2, 3)
 
 .head - first value of List
-.tail - last value of List (whatever remains after removing first value from List)
+.tail - remaining values of List (after removing first value from List)
 .isEmpty - boolean value of whether List is empty
 .reverse - reverses the List
 .max - max value in List
@@ -427,13 +467,34 @@ for (i <- listName) {
 }
 ```
 
+<br>
 
+### Sequences
 
-## Sets
+- Sequences are used to access specific elements.
 
-Collection of different elements (no duplicates) of same data type. All element values must be unique.
+```scala
+val aSequence: Seq[Int] = Seq(1,2,3)
+val accessedElement = aSequence(1) // Element at index 1 is 2
+```
 
-Two types of sets: mutable and immutable. All sets are immutable by default.
+<br>
+
+### Vectors
+
+- Vectors are a fast implementation of Sequences.
+
+```scala
+val aVector = Vector(1,2,3,4,5)
+```
+
+<br>
+
+### Sets
+
+- Sets allow for no duplicates
+- Sets do not preserve their order
+- Two types of sets: mutable and immutable. All sets are immutable by default
 
 ```scala
 val setName : Set[dataType] = Set(1, 2, 3, 4, 4, 4) // Set(1, 2, 3, 4)
@@ -441,10 +502,10 @@ val setName : Set[dataType] = Set(1, 2, 3, 4, 4, 4) // Set(1, 2, 3, 4)
 // To declare mutable Set
 var setName : scala.collection.mutable.Set[dataType] = scala.collection.mutable.Set(1, 2, 3, 4)
 
-// Add element to mutable Set (makes a new Set so needs to be assigned to a new variable)
-// Sets in scala are not ordered!
+// Add element to mutable Set (creates new Set => assign to new variable)
 setName + elementToAdd
 println(setName + 5) // Set(1, 5, 2, 3, 4)
+// Remove element using -
 
 // Check whether element is present in Set
 setName(elementToCheck)
@@ -467,16 +528,28 @@ for (i <- setName) {
 }
 ```
 
+<br>
 
+### Ranges
 
-## Maps
+```scala
+val aRange = 1 to 1000
+val twoByTwo = aRange.map(x => x * 2).toList // List(2,4,6,...2000)
+```
 
-Collection of key value pairs. Keys are unique.
+<br>
 
-Two types of maps: mutable and immutable. All maps are immutable by default.
+### Maps
+
+- Collection of key value pairs. Keys are unique
+- Two types of maps: mutable and immutable. All maps are immutable by default
 
 ```scala
 val mapName : Map[keyDataType, valueDataType] = Map(key -> value, ...)
+val aPhonebook: Map[String, Int] = Map(
+	("Berkan", 078123),
+  "Serkan" -> 079635
+)
 
 // Access specific value
 mapName(key)
@@ -494,15 +567,14 @@ mapOne ++ mapTwo
 mapName.keys.foreach { key => println("key " + key); println("value " + mapName(key))}
 ```
 
+<br>
 
+### Tuples
 
-## Tuples
-
-A class that can contain different data types of elements.
-
-They are of FIXED SIZE. You cannot change the values of tuples once declared.
-
-Tuples can contain up to 22 elements.
+- Tuples are a group of values under the same value
+- Tuples can contain elements of different data type
+- Tuples are of fixed size
+- Tuples can contain up to 22 elements
 
 ```scala
 val tupleName = (values) // val myTuple = (1, 2, "hello", true)
@@ -519,9 +591,9 @@ myTuple = new Tuple3(1, "hello", (2, 3))
 myTuple._3._2 // returns 3
 ```
 
+<br>
 
-
-## Options type
+## Options Type
 
 Container that can give you two values (instance of Some or None).
 
@@ -545,11 +617,13 @@ val opt : Option[Int] = Some(5) or None (empty)
 print(opt.isEmpty) // true for None, false for Some
 ```
 
-
+<br>
 
 ## Higher-Order Methods
 
 Doesnt modify original collection so should be stored in a new variable.
+
+### Map and Filter
 
 map - iterate over a collection (List, Array, etc) and then apply a function to each element.
 
@@ -576,6 +650,8 @@ println(lst.flatMap(x => List(x, x+1))) // returns List(1,2,2,3,3,4)
 // filter
 println(lst.filter(x => x % 2 == 0)) // returns List(2)
 ```
+
+### Reduce, Fold and Scan
 
 reduce (Left/Right) - reduces all elements to return one value using an accumulator, currentVal approach.
 
@@ -616,7 +692,7 @@ println(lst1.foldLeft(100)(_ + _)) // returns List(100, 101, 103, 106, 111, 118,
 println(lst1.foldLeft("z")(_ + _)) // returns List(z, zA, zAB, zABC)
 ```
 
-
+<br>
 
 ## Classes
 
@@ -794,13 +870,7 @@ Useful YouTube video explaining the concept: https://www.youtube.com/watch?v=_7U
 
 
 
-
-
-
-
-
-
-## Testing (MUnit)
+# Testing (MUnit)
 
 Test files go under the `src/test/scala` directory.
 
@@ -1384,138 +1454,25 @@ A pattern can be one of:
 
 
 
-# Rock the JVM - Scala at Light Speed
-
-<br>
-
-## Collections
-
-### Lists
-
-```scala
-val aList = List(1,2,3,4,5)
-val firstElement = aList.head
-val remainingElements = aList.tail
-val aPrependedList = 0 :: aList // List(0,1,2,3,4,5)
-val anExtendedList = 0 +: aList :+ 6 // List(0,1,2,3,4,5,6)
-```
-
-### Sequences
-
-Sequences are used to access specific elements.
-
-```scala
-val aSequence: Seq[Int] = Seq(1,2,3)
-val accessedElement = aSequence(1) // Element at index 1 is 2
-```
-
-### Vectors
-
-Vectors are a fast implementation of Sequences.
-
-```scala
-val aVector = Vector(1,2,3,4,5)
-```
-
-### Sets
-
-Sets allow for no duplicates.
-
-```scala
-val aSet = Set(1,2,3,4,1,2,3) // Set(1,2,3,4)
-val setHas5 = aSet.contains(5) // false
-val anAddedSet = aSet + 5 // Set(1,2,3,4,5)
-val aRemovedSet = aSet - 3 // Set(1,2,4)
-```
-
-### Ranges
-
-```scala
-val aRange = 1 to 1000
-val twoByTwo = aRange.map(x => x * 2).toList // List(2,4,6,...2000)
-```
-
-### Tuples
-
-Groups of values under the same value.
-
-```scala
-val aTuple = ("Berkan", 1998, true)
-```
-
-### Maps
-
-Key - Value pairs.
-
-```scala
-val aPhonebook: Map[String, Int] = Map(
-	("Berkan", 078123),
-  "Serkan" -> 079635
-)
-```
-
-<br>
-
-## Pattern Matching
-
-- If pattern match doesn't match any case, it will throw a MatchError
-- Pattern matching will try all cases in sequence (in order)
-
-### Switch Expression
-
-```scala
-val anInteger = 55
-val order = anInteger match {
-  case 1 => "first"
-  case 2 => "second"
-  case _ => anInteger + "th"
-}
-println(order) // 55th
-```
-
-### Case Class Decomposition (by structure)
-
-```scala
-case class Person(name: String, age: Int)
-val berkan = Person("Berkan", 23)
-val personGreeting = berkan match {
-  case Person(n, a) => s"My name is $n and I am $a years old"
-  case _ => "Something else"
-}
-println(personGreeting) // My name is Berkan and I am 23 years old
-```
-
-### Tuple Decomposition (by structure)
-
-```scala
-val aTuple = ("Berkan Marasli", "Rock")
-val musicDescription = aTuple match {
-  case (name, genre) => s"$name likes $genre"
-  case _ => "Something else"
-}
-```
-
-### List Decomposition (by structure)
-
-```scala
-val aList = List(1,2,3)
-val listDescription = aList match {
-  case List(_, 2, _) => "List containing 2 on its second position"
-  case _ => "Something else"
-}
-```
 
 
 
 
 
 
+# Learning scala from scratch
 
+- Declaring a variable: `val` for immutable and `var` for mutable
+- Declaring a function: `def fName(pName: pType, ...): fType = ...`
+- Calling a function (with no parameters): use `()` to signify a function with side effects and omit `()` for a function with no side effects:
+  1. `def helloWorld(): Unit = println("Hello World")` -> `helloWorld()`
+  2. `def helloWorldPure: String = "Hello World"` -> `val x = helloWorldPure`
 
-
-
-
-
+- Classes:
+  1. A class is a template that can create objects of a specific type. Use the `new` keyword to instantiate a new object of certain type
+  2. Use 'eq' operator to check two references are equal. `new1 eq new2` is true
+  3. Declaring a class: `class cName(aName: aType) {}`. The arguments are private by default and can be made public by using the `val` keyword
+- 
 
 
 
