@@ -193,5 +193,42 @@ db.{collectionName}.deleteMany({gender: "Male"})
 
 
 
+### Spring Boot Application - `application.properties` to connect to MongoDB
+
+```java
+// Based on above docker-compose.yaml file
+spring.data.mongodb.authentication-database=admin
+spring.data.mongodb.username=rootuser
+spring.data.mongodb.password=rootpass
+spring.data.mongodb.database={nameOfDatabaseToConnectTo}
+spring.data.mongodb.port=27017
+spring.data.mongodb.host=localhost
+```
+
+### Spring Boot Application - MongoRepository
+
+Pre-reqs:
+
+- @Document - identify java class that represents a Document.
+- @Id - identify property that represents Document ID.
+
+```java
+public interface {RepositoryName} extends MongoRepository<{documentName}, {IdType}> {
+  
+}
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
