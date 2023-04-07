@@ -130,7 +130,13 @@ git restore .
 
 
 
+```
+git branch // show all local branches of your repo. Starred branch is your current branch
 
+git branch --show-current // show only the name of the branch you're on
+
+git checkout {branchName} // switch branch to branch {branchName}
+```
 
 
 
