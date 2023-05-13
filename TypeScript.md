@@ -141,9 +141,154 @@ const useVehicle = (vehicle: Vehicle) => {
 
 ### Discriminated Unions
 
+Useful when working with object and union types.
 
+```typescript
+interface Bird {
+  type: 'bird'
+  flyingSpeed: number
+}
+
+interface Horse {
+  type: 'horse'
+  runningSpeed: number
+}
+
+type Animal = Bird | Horse
+
+const moveAnimal = (animal: Animal) => {
+  console.log('Moving with speed: ' + animal.flyingSpeed) // errror
+   // animal instanceof Bird will not work as at runtime, interfaces are not compiled
+  
+  // discriminated unions have one property in every union used to distinguish (type or kind normally)
+  let speed;
+  switch (animal.type) {
+    case 'bird':
+      speed = animal.flyingSpeed
+      break
+    case 'horse':
+      speed = animal.runningSpeed
+      break
+  }
+}
+```
 
 ### Type Casting
 
+Override TypeScript where it cannot figure out the type of something but you as the developer know what the type is.
+
+- <>
+- as
+
+```typescript
+const paragraph = document.querySelector('p') // HTMLParagraphElement | null
+
+const paragraphWithId = document.getElementById('some-id')! // HTMLElement
+paragraphWithId.value = '' // Error: property value does not exist on type HTMLElement
+
+// using <>
+const paragraphWithId = <HTMLParagraphElement>document.getElementById('some-id')!;
+
+// as keyword
+const paragraphWithId = document.getElementById('some-id')! as HTMLParagraphElement;
+```
+
+```typescript
+// ! at the end of the expression tells TypeScript the expression will never yield null
+// Its not required if Type Casting
+```
+
+### Index (Properities) Types
+
+```typescript
+// Target is an interface of { email: 'not a valid email', username: 'must start with character' }
+// Do not know exactly key name and the number of key/value pairs
+interface ErrorContainer {
+  id: string // Can have this key/value
+  count: number // Cannot have this key/value as it breaks rule below
+  [key: string]: string
+}
+```
+
 ### Function Overloads
+
+```typescript
+type A = string | number
+
+const add = (b: A, c: A) => {
+  if (typeof b === 'string' || typeof b === 'string') {
+    return a.toString() + b.toString()
+  }
+  return a + b
+}
+
+// type = A and not number
+const result = add(1,5)
+
+// function overloading
+function add(b: number, c: number): number;
+function add(b: string, c: string): string;
+function add(b: number, c: string): string;
+function add(b: A, c: A) {
+  if (typeof b === 'string' || typeof b === 'string') {
+    return a.toString() + b.toString()
+  }
+  return a + b
+}
+
+// Number of function overloading is not limited
+// When compiling, TypeScript will combine the logic for runtime
+```
+
+### Optional Chaining
+
+```typescript
+const fetchedUserData = {
+  id: '',
+  name: '',
+  // job: { title: '', description: ''}
+}
+
+// when the data is uncertain
+fetchedUserData.job && fetchedUserData.job.title // JavaScript method
+fetchedUserData?.job?.title // TypeScript method
+
+// behind the scenes, it compiles to a if condition to check if the expression before the ? is not undefined
+```
+
+### Nullish Coalescing
+
+```typescript
+const userInput = ''
+
+// || checks for falsy values: null, undefined, '' (empty string)
+const storedData = userInput || 'DEFAULT' // storedData = 'DEFAULT'
+
+// To check for just undefined or null ONLY
+const storedData = userInput ?? 'DEFAULT' // storedData = ''
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
