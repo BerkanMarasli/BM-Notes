@@ -268,7 +268,103 @@ const storedData = userInput || 'DEFAULT' // storedData = 'DEFAULT'
 const storedData = userInput ?? 'DEFAULT' // storedData = ''
 ```
 
+## Generics
 
+### Creating A Generic Function
+
+```typescript
+// return type = object
+function merge(obJA: object, objB: object) {
+  return Object.assign(objA, objB)
+}
+
+// return type = T & U
+function merge<T, U>(objA: T, objB: U) {
+  return Object.assign(objA, objB)
+}
+```
+
+### Working With Constraints
+
+```typescript
+function merge<T, U>(objA: T, objB: U) {
+  return Object.assign(objA, objB)
+}
+
+const mergedObj = merge({name: '', hobbies: ['']}, 30) // cannot merge number with object
+
+// add a type constraint using extends keyword
+function merge<T extends object, U extends object>(objA: T, objB: U) {
+  return Object.assign(objA, objB)
+}
+```
+
+### keyof Contraint
+
+```typescript
+function extractAndConvert(obj: object, key: string) {
+  return obj[key] // dont know if the object will have a key that is equal to key
+}
+
+function extractAndConvert<T extends object, U extends keyof T>(obj: T, key: U) {
+  return obj[key]
+}
+```
+
+### Generic Classes
+
+```typescript
+class DataStorage<T> {
+  private data: T[] = []
+  
+  addItem(item: T) {
+    this.data.push(item)
+  }
+  
+  removeItem(item: T) {
+    if (this.data.indexOf(item) === -1) {
+      return
+    }
+    this.data.splice(this.data.indexOf(item), 1)
+  }
+  
+  getItems() {
+    return [...this.data]
+  }
+}
+
+const textStorage = new DataStorage<string>() // works
+
+const objStorage = new DataStorage<object>() // object passed in by reference which causes problem when trying to remove an object item (two different object references)
+// Therefore you only really want it to work with primative values... (in this case)
+
+class DataStorage<T extends string | number | boolean> {}
+```
+
+### Generic Utility Types
+
+https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype
+
+```typescript
+// Partial utility type
+interface CourseGoal {
+  title: string
+  description: string
+  completeUntil: Date
+}
+
+const createCourseGoal = (title: string, description: string, date: Date): CourseGoal => {
+  let courseGoal: Partial<CourseGoal> = {} // Partial wraps our type and makes all properities as optional
+  courseGoal.title = title
+  courseGoal.description = description
+  courseGoal.completeUntil = completeUntil
+  return courseGoal as CourseGoal
+}
+
+// Readonly utility type
+const names: Readonly<string[]> = ['', '']
+names.push('') // TypeScript error
+```
 
 
 
