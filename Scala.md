@@ -12,11 +12,7 @@
 
 ## Basics
 
-### Printing
-
-println - printing, and forcing a new line on the next print
-
-print - printing, wihtout forcing a new line on next print
+### Printing - `println`() vs `print`()
 
 ```scala
 println("Hello World!")
@@ -282,15 +278,15 @@ If the function does not return anything, the returnDataType is Unit.
 Function names can be defined as operators (e.g. +, -, **).
 
 ```scala
-def functionName(argument : argumentDataType, ...) : returnDataType = // Do something (one line)
+def functionName(argument: argumentDataType, ...) : returnDataType = // Do something (one line)
 
-def functionName(argument : argumentDataType, ...) : returnDataType = {
+def functionName(argument: argumentDataType, ...) : returnDataType = {
   // Do something (multi line)
 }
 
 // Function that takes only one argument inside object...
 object Math {
-  def square(x : Int) : Int = x * x
+  def square(x: Int) : Int = x * x
 }
 println(Math.square(3)) == println(Math square 3)
 ```
@@ -625,9 +621,8 @@ Doesnt modify original collection so should be stored in a new variable.
 
 ### Map and Filter
 
-map - iterate over a collection (List, Array, etc) and then apply a function to each element.
-
-filter - iterate over a collection and filter the collection based on a condition.
+- map - iterate over a collection (List, Array, etc) and then apply a function to each element.
+- filter - iterate over a collection and filter the collection based on a condition.
 
 ```scala
 lst.map(operation)
@@ -653,11 +648,9 @@ println(lst.filter(x => x % 2 == 0)) // returns List(2)
 
 ### Reduce, Fold and Scan
 
-reduce (Left/Right) - reduces all elements to return one value using an accumulator, currentVal approach.
-
-fold (Left/Right) - specify start value and then apply reduce
-
-scan (Left/Right) - same as fold... but gives map of intermediate result (list of the results along the way).
+- reduce (Left/Right) - reduces all elements to return one value using an accumulator, currentVal approach.
+- fold (Left/Right) - specify start value and then apply reduce
+- scan (Left/Right) - same as fold... but gives map of intermediate result (list of the results along the way).
 
 ```scala
 val lst1 = List(1, 2, 3, 5, 7, 10, 13)
@@ -696,9 +689,8 @@ println(lst1.foldLeft("z")(_ + _)) // returns List(z, zA, zAB, zABC)
 
 ## Classes
 
-object keyword used to create a single-ton class. No new instance of this class can be created.
-
-class keyword used to create class that can have multiple instances.
+- `object` keyword used to create a single-ton class. No new instance of this class can be created.
+- `class` keyword used to create class that can have multiple instances.
 
 ```scala
 // Basic definition
@@ -728,9 +720,8 @@ newUser.printName // valid as accessing member through class method
 
 ### Auxiliary constructors
 
-Alternative constructor for a class. They must have different signatures and must call the previously defined constructor.
-
-Defined as a method with the name 'this'
+- Alternative constructor for a `class`. They must have different signatures and must call the previously defined constructor.
+- Defined as a method with the name 'this'
 
 ```scala
 class User(var name: String, var age: Int) {
@@ -819,11 +810,9 @@ val largeRectangle = smallRectangle.copy(width = smallRectangle.width * 2)
 
 ### Traits
 
-Scala doesnt allow multiple inhertience (extends) from more than one class.
-
-Interface - describes a set of methods and properties that an implementing class must have.
-
-Traits - partially implemented interfaces. Do not introduce constructors.
+- Scala doesnt allow multiple inhertience (extends) from more than one class.
+- Interface - describes a set of methods and properties that an implementing class must have.
+- Traits - partially implemented interfaces. Do not introduce constructors.
 
 ```scala
 trait traitName {
